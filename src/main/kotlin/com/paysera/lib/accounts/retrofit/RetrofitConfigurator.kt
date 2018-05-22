@@ -8,8 +8,10 @@ import com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.reflect.TypeToken
+import com.paysera.lib.accounts.deserializers.CardsDeserializer
 import com.paysera.lib.accounts.entities.AccountsApiCredentials
 import com.paysera.lib.accounts.entities.Balance
+import com.paysera.lib.accounts.entities.cards.Card
 import io.reactivex.schedulers.Schedulers
 
 class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCredentials) {
@@ -36,7 +38,9 @@ class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCreden
             val gsonBuilder = GsonBuilder()
             gsonBuilder.setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
             val balancesType = TypeToken.getParameterized(List::class.java, Balance::class.java).type
+            val cardsType = TypeToken.getParameterized(List::class.java, Card::class.java).type
             gsonBuilder.registerTypeAdapter(balancesType, BalanceDeserializer())
+            gsonBuilder.registerTypeAdapter(cardsType, CardsDeserializer())
             return GsonConverterFactory.create(gsonBuilder.create())
         }
     }
