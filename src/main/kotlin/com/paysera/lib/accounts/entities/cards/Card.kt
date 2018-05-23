@@ -1,5 +1,7 @@
 package com.paysera.lib.accounts.entities.cards
 
+import org.joda.money.Money
+
 class Card(
     val id: Int,
     val cardOwnerId: Int,
@@ -15,7 +17,7 @@ class Card(
     val shippingDate: String,
     val main: Boolean,
     val deliveryType: String,
-    val deliveryPriceAmount: Price,
-    val issuePriceAmount: Price,
+    val deliveryPriceAmount: Money,
+    val issuePriceAmount: Money,
     val account: Account
 )
