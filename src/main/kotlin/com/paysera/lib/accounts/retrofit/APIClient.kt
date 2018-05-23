@@ -8,24 +8,24 @@ import retrofit2.http.*
 
 interface APIClient {
 
-	@GET("account/rest/v1/accounts/{accountNumber}/full-balance")
-	fun getFullBalances(@Path("accountNumber") accountNumber: String): Observable<List<Balance>>
+    @GET("account/rest/v1/accounts/{accountNumber}/full-balance")
+    fun getFullBalances(@Path("accountNumber") accountNumber: String): Observable<List<Balance>>
 
-	@GET("transfer/rest/v1/swift/{iban}")
-	fun getIbanInformation(@Path("iban") iban: String): Observable<IbanInformation>
+    @GET("transfer/rest/v1/swift/{iban}")
+    fun getIbanInformation(@Path("iban") iban: String): Observable<IbanInformation>
 
-	@GET("payment-card/v1/cards")
-	fun getCards(
-		@Query("account_numbers[]") accountNumbers: List<String>,
-		@Query("statuses[]") statuses: List<String>,
-		@Query("account_owner_id") accountOwnerId: String,
-		@Query("card_owner_id") cardOwnerId: String
-	): Observable<List<Card>>
+    @GET("payment-card/v1/cards")
+    fun getCards(
+        @Query("account_numbers[]") accountNumbers: List<String>,
+        @Query("statuses[]") statuses: List<String>,
+        @Query("account_owner_id") accountOwnerId: String,
+        @Query("card_owner_id") cardOwnerId: String
+    ): Observable<List<Card>>
 
-	@POST("payment-card/v1/cards")
-	fun createCard(@Body card: Card): Observable<Card>
+    @POST("payment-card/v1/cards")
+    fun createCard(@Body card: Card): Observable<Card>
 
-	@PUT("payment-card/v1/cards/{id}/activate")
-	fun activateCard(@Path("id") id: String): Observable<Card>
+    @PUT("payment-card/v1/cards/{id}/activate")
+    fun activateCard(@Path("id") id: String): Observable<Card>
 
 }

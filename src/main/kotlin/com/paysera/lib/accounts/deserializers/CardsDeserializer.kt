@@ -8,9 +8,9 @@ import java.lang.reflect.Type
 
 class CardsDeserializer : JsonDeserializer<List<Card>> {
 
-	override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext): List<Card> {
-		val cards = arrayListOf<Card>()
-		json?.asJsonObject?.getAsJsonArray("cards")?.forEach { cards.add(context.deserialize(it, Card::class.java)) }
-		return cards
-	}
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext): List<Card> {
+        val cards = arrayListOf<Card>()
+        json?.asJsonObject?.getAsJsonArray("cards")?.forEach { cards.add(context.deserialize(it, Card::class.java)) }
+        return cards
+    }
 }
