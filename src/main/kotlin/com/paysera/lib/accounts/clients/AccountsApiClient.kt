@@ -41,7 +41,7 @@ class AccountsApiClient(
         return apiClient.getFullBalances(accountNumber).retryWhen(retryCondition)
     }
 
-    fun getCards(cardsFilter: CardsFilter = CardsFilter()): Observable<List<Card>> {
+    fun getCards(cardsFilter: CardsFilter): Observable<List<Card>> {
         return with(cardsFilter) {
             apiClient.getCards(accountNumbers, statuses, cardOwnerId, accountOwnerId).retryWhen(retryCondition)
         }
