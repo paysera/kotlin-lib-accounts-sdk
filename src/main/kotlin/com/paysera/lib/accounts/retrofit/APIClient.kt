@@ -2,10 +2,10 @@ package com.paysera.lib.accounts.retrofit
 
 import com.paysera.lib.accounts.entities.Balance
 import com.paysera.lib.accounts.entities.IbanInformation
-import com.paysera.lib.accounts.entities.Limit
+import com.paysera.lib.accounts.entities.CardLimit
 import com.paysera.lib.accounts.entities.cards.Card
-import com.paysera.lib.accounts.entities.cards.Cvv2
-import com.paysera.lib.accounts.entities.cards.Pin
+import com.paysera.lib.accounts.entities.cards.CardCvv2
+import com.paysera.lib.accounts.entities.cards.CardPin
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -38,11 +38,11 @@ interface APIClient {
     fun cancelCard(@Path("id") id:String): Observable<Card>
 
     @GET("payment-card/v1/accounts/{accountNumber}/card-limit")
-    fun getCardLimit(@Path("accountNumber") accountNumber: String): Observable<Limit>
+    fun getCardLimit(@Path("accountNumber") accountNumber: String): Observable<CardLimit>
 
     @PUT("payment-card/v1/accounts/{accountNumber}/card-limit")
-    fun setCardLimit(@Path("accountNumber") accountNumber: String, @Body limit: Limit): Observable<Limit>
+    fun setCardLimit(@Path("accountNumber") accountNumber: String, @Body cardLimit: CardLimit): Observable<CardLimit>
 
     @PUT("payment-card/v1/cards/{id}/pin")
-    fun getCardPin(@Path("id") cardId: String, @Body cvv2: Cvv2): Observable<Pin>
+    fun getCardPin(@Path("id") cardId: String, @Body cardCvv2: CardCvv2): Observable<CardPin>
 }

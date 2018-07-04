@@ -1,3 +1,3 @@
 package com.paysera.lib.accounts.entities.cards
 
-class Pin(val pinCode: String)
+class CardCvv2(val cvv2: String)

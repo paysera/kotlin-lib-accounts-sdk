@@ -10,9 +10,9 @@ import com.google.gson.reflect.TypeToken
 import com.paysera.lib.accounts.deserializers.*
 import com.paysera.lib.accounts.entities.AccountsApiCredentials
 import com.paysera.lib.accounts.entities.Balance
-import com.paysera.lib.accounts.entities.Limit
+import com.paysera.lib.accounts.entities.CardLimit
 import com.paysera.lib.accounts.entities.cards.Card
-import com.paysera.lib.accounts.entities.cards.Pin
+import com.paysera.lib.accounts.entities.cards.CardPin
 import com.paysera.lib.accounts.serializers.LimitSerializer
 import io.reactivex.schedulers.Schedulers
 import org.joda.money.Money
@@ -46,9 +46,9 @@ class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCreden
         gsonBuilder.registerTypeAdapter(balancesType, BalanceDeserializer())
         gsonBuilder.registerTypeAdapter(cardsType, CardsDeserializer())
         gsonBuilder.registerTypeAdapter(Money::class.java, MoneyDeserializer())
-        gsonBuilder.registerTypeAdapter(Pin::class.java, PinDeserializer())
-        gsonBuilder.registerTypeAdapter(Limit::class.java, LimitDeserializer())
-        gsonBuilder.registerTypeAdapter(Limit::class.java, LimitSerializer())
+        gsonBuilder.registerTypeAdapter(CardPin::class.java, PinDeserializer())
+        gsonBuilder.registerTypeAdapter(CardLimit::class.java, CardLimitDeserializer())
+        gsonBuilder.registerTypeAdapter(CardLimit::class.java, LimitSerializer())
         return GsonConverterFactory.create(gsonBuilder.create())
     }
 }
