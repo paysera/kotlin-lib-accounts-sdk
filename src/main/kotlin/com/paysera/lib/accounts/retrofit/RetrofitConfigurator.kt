@@ -45,7 +45,7 @@ class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCreden
         gsonBuilder.registerTypeAdapter(balancesType, BalanceDeserializer())
         gsonBuilder.registerTypeAdapter(cardsType, CardsDeserializer())
         gsonBuilder.registerTypeAdapter(Money::class.java, MoneyDeserializer())
-        gsonBuilder.registerTypeAdapter(CardPin::class.java, PinDeserializer())
+        gsonBuilder.registerTypeAdapter(CardPin::class.java, CardPinDeserializer())
         gsonBuilder.registerTypeAdapter(CardLimit::class.java, CardLimitSerializer())
         return GsonConverterFactory.create(gsonBuilder.create())
     }
