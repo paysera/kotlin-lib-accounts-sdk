@@ -7,13 +7,12 @@ import com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.reflect.TypeToken
-import com.paysera.lib.accounts.deserializers.*
+import com.paysera.lib.accounts.serializers.*
 import com.paysera.lib.accounts.entities.AccountsApiCredentials
 import com.paysera.lib.accounts.entities.Balance
 import com.paysera.lib.accounts.entities.CardLimit
 import com.paysera.lib.accounts.entities.cards.Card
 import com.paysera.lib.accounts.entities.cards.CardPin
-import com.paysera.lib.accounts.serializers.LimitSerializer
 import io.reactivex.schedulers.Schedulers
 import org.joda.money.Money
 
@@ -47,8 +46,7 @@ class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCreden
         gsonBuilder.registerTypeAdapter(cardsType, CardsDeserializer())
         gsonBuilder.registerTypeAdapter(Money::class.java, MoneyDeserializer())
         gsonBuilder.registerTypeAdapter(CardPin::class.java, PinDeserializer())
-        gsonBuilder.registerTypeAdapter(CardLimit::class.java, CardLimitDeserializer())
-        gsonBuilder.registerTypeAdapter(CardLimit::class.java, LimitSerializer())
+        gsonBuilder.registerTypeAdapter(CardLimit::class.java, CardLimitSerializer())
         return GsonConverterFactory.create(gsonBuilder.create())
     }
 }
