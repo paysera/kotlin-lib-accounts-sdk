@@ -19,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCredentials) {
 
@@ -31,6 +32,8 @@ class RetrofitConfigurator(private val accountsApiCredentials: AccountsApiCreden
     }
 
     private fun createOkHttpClient() = with(OkHttpClient().newBuilder()) {
+        writeTimeout(5, TimeUnit.MINUTES)
+        readTimeout(5, TimeUnit.MINUTES)
         addInterceptor { chain ->
             val originalRequest = chain.request()
             val builder =
