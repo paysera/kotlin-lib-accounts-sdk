@@ -150,4 +150,6 @@ class AccountsApiClient(
 
     fun revokeUserAuthorization(authorizationId: String, userId: Int) =
         apiClient.revokeUserAuthorization(authorizationId, userId).retryWhen(retryCondition)
+
+    fun getTransferPurposeCodes() = apiClient.getTransferPurposeCodes().retryWhen(retryCondition)
 }

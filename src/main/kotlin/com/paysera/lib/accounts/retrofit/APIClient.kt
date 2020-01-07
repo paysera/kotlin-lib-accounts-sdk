@@ -6,6 +6,7 @@ import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationReque
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.common.MetadataAwareResponse
 import com.paysera.lib.accounts.entities.transfers.Transfer
+import com.paysera.lib.accounts.entities.transfers.TransferPurposeCodes
 import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.Response
@@ -50,6 +51,9 @@ interface APIClient {
     fun getCategorizedAccountNumbers(
         @Query("categories[]") categories: List<String>
     ): Single<List<CategorizedAccountNumbers>>
+
+    @GET("transfer/rest/v1/purpose-codes")
+    fun getTransferPurposeCodes(): Single<TransferPurposeCodes>
 
     @GET("issued-payment-card/v1/cards")
     fun getCards(
