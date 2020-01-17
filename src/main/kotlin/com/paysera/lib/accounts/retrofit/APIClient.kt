@@ -5,6 +5,7 @@ import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.common.MetadataAwareResponse
+import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.entities.transfers.Transfer
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -53,6 +54,12 @@ interface APIClient {
 
     @GET("transfer/rest/v1/purpose-codes")
     fun getTransferPurposeCodes(): Single<MetadataAwareResponse<String>>
+
+    @GET("transfer/rest/v1/conversion-transfers")
+    fun getConversionTransfers(
+        @Query("account_number_list[]")  accountNumberList: List<String>,
+        @Query("statuses[]")  statuses: List<String>
+    ) : Single<MetadataAwareResponse<ConversionTransfer>>
 
     @GET("issued-payment-card/v1/cards")
     fun getCards(

@@ -6,6 +6,7 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.common.BaseFilter
+import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
 import com.paysera.lib.accounts.interfaces.TokenRefresherInterface
 import com.paysera.lib.accounts.retrofit.APIClient
 import io.reactivex.Flowable
@@ -63,6 +64,11 @@ class AccountsApiClient(
         }
 
     fun getTransferPurposeCodes() = apiClient.getTransferPurposeCodes().retryWhen(retryCondition)
+
+    fun getConversionTransfers(filter: ConversionTransferFilter) =
+        with(filter) {
+            apiClient.getConversionTransfers(filter.accountNumberList, filter.statuses).retryWhen(retryCondition)
+        }
 
     fun getCards(cardsFilter: CardsFilter) =
         with(cardsFilter) {
