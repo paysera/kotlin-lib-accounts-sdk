@@ -168,7 +168,7 @@ interface NetworkApiClient {
     ): Deferred<ClientAllowance>
 
     @GET("client-allowance/rest/v1/client-allowances/can-fill-questionnaire")
-    fun canFillQuestionnare(
+    fun canFillQuestionnaire(
         @Query("user_id") userId: Int
     ): Deferred<ClientAllowance>
 

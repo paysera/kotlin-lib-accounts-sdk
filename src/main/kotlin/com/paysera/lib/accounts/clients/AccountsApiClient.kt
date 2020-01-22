@@ -161,8 +161,8 @@ class AccountsApiClient(
             userId
         )
 
-    fun canFillQuestionnare(userId: Int) =
-        networkApiClient.canFillQuestionnare(
+    fun canFillQuestionnaire(userId: Int) =
+        networkApiClient.canFillQuestionnaire(
             userId
         )
 

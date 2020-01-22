@@ -1,43 +1,25 @@
 package com.paysera.lib.accounts.clients
 
-import TestConfiguration
 import com.paysera.lib.accounts.entities.cards.CategorizedAccountNumbersFilter
-import com.paysera.lib.accounts.retrofit.NetworkApiFactory
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import runCatchingBlocking
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class TransferTest {
+internal class TransferTest : BaseTest() {
 
-    private lateinit var apiClient: AccountsApiClient
-
-    @BeforeAll
-    fun setUp() {
-        apiClient = NetworkApiFactory(
-            TestConfiguration.userAgent,
-            TestConfiguration.apiCredentials,
-            TestConfiguration.timeout,
-            TestConfiguration.loggingLevel
-        ).createClient(TestConfiguration.baseUrl, TestConfiguration.tokenRefresher)
-    }
-
-    @AfterAll
-    fun tearDown() {
-        apiClient.cancelCalls()
-    }
+    private val testTransferId = "abc"
+    private val testIban = "LT....."
 
     @Test
     fun getTransfer() {
-        val response = apiClient.getTransfer(TestConfiguration.existingTransferId).runCatchingBlocking()
+        val response = apiClient.getTransfer(testTransferId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun getIbanInformation() {
-        val response = apiClient.getIbanInformation(TestConfiguration.testIbanNumber).runCatchingBlocking()
+        val response = apiClient.getIbanInformation(testIban).runCatchingBlocking()
         assert(response.isSuccess)
         assert(response.getOrNull() != null)
     }

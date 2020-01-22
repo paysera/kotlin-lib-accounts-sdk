@@ -1,33 +1,24 @@
 package com.paysera.lib.accounts.clients
 
-import TestConfiguration
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
-import com.paysera.lib.accounts.retrofit.NetworkApiFactory
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import runCatchingBlocking
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class UpdateAuthorizationTest {
+internal class UpdateAuthorizationTest : BaseTest() {
 
-    private lateinit var apiClient: AccountsApiClient
+    private val testAccountNumber = "EVP..."
+    private val testUserIdList = listOf(-1, -1)
+
     private var authorizationId: String? = null
 
-    @BeforeAll
-    fun setUp() {
-        apiClient = NetworkApiFactory(
-            TestConfiguration.userAgent,
-            TestConfiguration.apiCredentials,
-            TestConfiguration.timeout,
-            TestConfiguration.loggingLevel
-        ).createClient(TestConfiguration.baseUrl, TestConfiguration.tokenRefresher)
-
+    override fun setUp() {
+        super.setUp()
         val result = apiClient.createAuthorization(CreateAuthorizationRequest(
-            accountNumber = TestConfiguration.testAccountNumber,
-            userIds = listOf(TestConfiguration.authorizationUserIdList.first()),
+            accountNumber = testAccountNumber,
+            userIds = testUserIdList,
             readPermission = true,
             writePermission = false,
             signPermission = null
@@ -38,13 +29,12 @@ internal class UpdateAuthorizationTest {
         authorizationId = authorization?.id
     }
 
-    @AfterAll
-    fun tearDown() {
+    override fun tearDown() {
         authorizationId?.let {
             apiClient.deleteAuthorization(it).runCatchingBlocking()
         }
-        apiClient.cancelCalls()
         authorizationId = null
+        super.tearDown()
     }
 
     @Test
@@ -52,8 +42,8 @@ internal class UpdateAuthorizationTest {
         val result = apiClient.updateAuthorization(
             authorizationId!!,
             CreateAuthorizationRequest(
-                accountNumber = TestConfiguration.testAccountNumber,
-                userIds = TestConfiguration.authorizationUserIdList,
+                accountNumber = testAccountNumber,
+                userIds = testUserIdList,
                 readPermission = true,
                 writePermission = true,
                 signPermission = null
@@ -64,22 +54,20 @@ internal class UpdateAuthorizationTest {
         assert(authorization != null)
         assert(authorization!!.writePermission)
         authorizationId = authorization?.id
-
     }
 
     @Test
     fun revokeUserAuthorization() {
         val result = apiClient.revokeUserAuthorization(
             authorizationId!!,
-            TestConfiguration.authorizationUserIdList.first()
+            testUserIdList.first()
         ).runCatchingBlocking()
         assert(result.isSuccess)
-        val authorizations = apiClient.getAuthorizations(AuthorizationFilter(listOf(TestConfiguration.testAccountNumber))).runCatchingBlocking().getOrNull()
+        val authorizations = apiClient.getAuthorizations(AuthorizationFilter(listOf(testAccountNumber))).runCatchingBlocking().getOrNull()
         authorizations?.filter { it.id == authorizationId }?.firstOrNull()?.let {
             assert(it.users.size == 1)
         } ?: run {
             assert(false)
         }
-
     }
 }

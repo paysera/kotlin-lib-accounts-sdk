@@ -1,36 +1,17 @@
 package com.paysera.lib.accounts.clients
 
-import TestConfiguration
-import com.paysera.lib.accounts.retrofit.NetworkApiFactory
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import runCatchingBlocking
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class QuestionnaireTest {
+internal class QuestionnaireTest : BaseTest() {
 
-    private lateinit var apiClient: AccountsApiClient
-
-    @BeforeAll
-    fun setUp() {
-        apiClient = NetworkApiFactory(
-            TestConfiguration.userAgent,
-            TestConfiguration.apiCredentials,
-            TestConfiguration.timeout,
-            TestConfiguration.loggingLevel
-        ).createClient(TestConfiguration.baseUrl, TestConfiguration.tokenRefresher)
-    }
-
-    @AfterAll
-    fun tearDown() {
-        apiClient.cancelCalls()
-    }
+    private val testUserId = -1 // your userId
 
     @Test
     fun getLastUserQuestionnaire() {
-        val response = apiClient.getLastUserQuestionnaire(TestConfiguration.userId).runCatchingBlocking()
+        val response = apiClient.getLastUserQuestionnaire(testUserId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 }
