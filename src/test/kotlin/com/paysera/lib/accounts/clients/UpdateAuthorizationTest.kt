@@ -53,7 +53,7 @@ internal class UpdateAuthorizationTest : BaseTest() {
         val authorization = result.getOrNull()
         assert(authorization != null)
         assert(authorization!!.writePermission)
-        authorizationId = authorization?.id
+        authorizationId = authorization.id
     }
 
     @Test

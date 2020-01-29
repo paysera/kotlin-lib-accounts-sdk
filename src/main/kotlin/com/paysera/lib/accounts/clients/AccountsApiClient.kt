@@ -7,8 +7,8 @@ import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
-import com.paysera.lib.accounts.entities.common.BaseFilter
 import com.paysera.lib.accounts.retrofit.NetworkApiClient
+import com.paysera.lib.common.entities.BaseFilter
 import com.paysera.lib.common.entities.MetadataAwareResponse
 import com.paysera.lib.common.retrofit.ApiRequestManager
 import com.paysera.lib.common.retrofit.BaseApiClient
