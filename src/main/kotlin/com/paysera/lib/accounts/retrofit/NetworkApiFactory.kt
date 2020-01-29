@@ -60,6 +60,9 @@ class NetworkApiFactory(
         gsonBuilder.registerTypeAdapter(TransferNotification::class.java, TransferNotificationDeserializer())
         gsonBuilder.registerTypeAdapter(Date::class.java, DateSerializer())
 
+        object : TypeToken<MetadataAwareResponse<Authorization>>() {}.type.apply {
+            gsonBuilder.registerTypeAdapter(this, MetadataAwareResponseDeserializer(Authorization::class.java))
+        }
         object : TypeToken<MetadataAwareResponse<String>>() {}.type.apply {
             gsonBuilder.registerTypeAdapter(this, MetadataAwareResponseDeserializer(String::class.java))
         }

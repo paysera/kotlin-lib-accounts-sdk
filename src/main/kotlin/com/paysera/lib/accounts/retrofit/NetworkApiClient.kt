@@ -184,7 +184,7 @@ interface NetworkApiClient {
         @Query("order_by") orderBy: String?,
         @Query("order_direction") orderDirection: String?,
         @Query("replaced_authorization_ids") replacedAuthorizationIds: List<String>?
-    ): Deferred<List<Authorization>>
+    ): Deferred<MetadataAwareResponse<Authorization>>
 
     @POST("permission/rest/v1/authorizations")
     fun createAuthorization(
