@@ -199,4 +199,15 @@ class AccountsApiClient(
             authorizationId,
             userId
         )
+
+    fun getPaymentCardDeliveryPreference(accountNumber: String) =
+            networkApiClient.getPaymentCardDeliveryPreference(
+                    accountNumber
+            )
+
+    fun setPaymentCardDeliveryPreference(accountNumber: String, paymentCardDelivery: PaymentCardDelivery) =
+            networkApiClient.setPaymentCardDeliveryPreference(
+                    accountNumber,
+                    paymentCardDelivery
+            )
 }
