@@ -69,6 +69,7 @@ interface NetworkApiClient {
     @GET("transfer/rest/v1/purpose-codes")
     fun getTransferPurposeCodes(): Deferred<MetadataAwareResponse<String>>
 
+    @GET("transfer/rest/v1/conversion-transfers")
     fun getConversionTransfers(
         @Query("account_number_list[]")  accountNumberList: List<String>,
         @Query("statuses[]")  statuses: List<String>
