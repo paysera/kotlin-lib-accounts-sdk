@@ -201,13 +201,18 @@ class AccountsApiClient(
         )
 
     fun getPaymentCardDeliveryPreference(accountNumber: String) =
-            networkApiClient.getPaymentCardDeliveryPreference(
-                    accountNumber
-            )
+        networkApiClient.getPaymentCardDeliveryPreference(
+            accountNumber
+        )
 
     fun setPaymentCardDeliveryPreference(accountNumber: String, paymentCardDelivery: PaymentCardDelivery) =
-            networkApiClient.setPaymentCardDeliveryPreference(
-                    accountNumber,
-                    paymentCardDelivery
-            )
+        networkApiClient.setPaymentCardDeliveryPreference(
+            accountNumber,
+            paymentCardDelivery
+        )
+
+    fun getPaymentCardExpiringOrderRestriction(accountNumber: String) =
+        networkApiClient.getPaymentCardExpiringOrderRestriction(
+            accountNumber
+        )
 }

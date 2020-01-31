@@ -19,8 +19,14 @@ internal class CardDeliveryAddressTest : BaseTest() {
 
     @Test
     fun setPaymentCardDeliveryPreference() {
-        val response = apiClient.setPaymentCardDeliveryPreference(testCardAccountNumber, PaymentCardDelivery(6720691,
+        val response = apiClient.setPaymentCardDeliveryPreference(testCardAccountNumber, PaymentCardDelivery(0,
                 CardShippingAddress("08426","Testing","Vilnius", "lt"), "regular")).runCatchingBlocking()
+        assert(response.isSuccess)
+    }
+
+    @Test
+    fun getPaymentCardExpiringOrderRestriction() {
+        val response = apiClient.getPaymentCardExpiringOrderRestriction(testCardAccountNumber).runCatchingBlocking()
         assert(response.isSuccess)
     }
 }

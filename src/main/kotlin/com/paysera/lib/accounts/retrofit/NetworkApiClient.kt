@@ -218,4 +218,9 @@ interface NetworkApiClient {
             @Path("accountNumber") accountNumber: String,
             @Body paymentCardDelivery: PaymentCardDelivery
     ): Deferred<PaymentCardDelivery>
+
+    @GET("issued-payment-card/v1/accounts/{accountNumber}/expiring-card-reorder-restriction")
+    fun getPaymentCardExpiringOrderRestriction(
+        @Path("accountNumber") accountNumber: String
+    ): Deferred<PaymentCardExpiringOrderRestriction>
 }
