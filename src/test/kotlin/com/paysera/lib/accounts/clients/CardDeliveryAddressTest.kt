@@ -9,7 +9,7 @@ import runCatchingBlocking
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class CardDeliveryAddressTest : BaseTest() {
 
-    private val testCardAccountNumber = "EVP..."
+    private val testCardAccountNumber = "EVP.."
 
     @Test
     fun getPaymentCardDeliveryPreference() {
@@ -19,8 +19,8 @@ internal class CardDeliveryAddressTest : BaseTest() {
 
     @Test
     fun setPaymentCardDeliveryPreference() {
-        val response = apiClient.setPaymentCardDeliveryPreference(testCardAccountNumber, PaymentCardDelivery(0,
-                CardShippingAddress("08426","Testing","Vilnius", "lt"), "regular")).runCatchingBlocking()
+        val response = apiClient.setPaymentCardDeliveryPreference(testCardAccountNumber, PaymentCardDelivery(6720691,
+                CardShippingAddress("08426","pilaites pr.16","Vilnius", "LT"), "regular")).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
