@@ -160,8 +160,8 @@ interface NetworkApiClient {
 
     @GET("issued-payment-card/v1/card-account-issue-price")
     fun getCardIssuePrice(
-        @Query("cardAccountOwnerId") cardAccountOwnerId: Int,
-        @Query("cardOwnerId") cardOwnerId: Int
+        @Query("card_account_owner_id") cardAccountOwnerId: Int,
+        @Query("card_owner_id") cardOwnerId: Int
     ): Deferred<CardIssuePrice>
 
     @GET("issued-payment-card/v1/card-delivery-date")
