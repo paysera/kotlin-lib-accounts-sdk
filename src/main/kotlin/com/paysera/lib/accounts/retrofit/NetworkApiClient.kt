@@ -71,19 +71,19 @@ interface NetworkApiClient {
 
     @GET("transfer/rest/v1/conversion-transfers")
     fun getConversionTransfers(
-        @Query("account_number_list[]")  accountNumberList: List<String>,
-        @Query("statuses[]")  statuses: List<String>
-    ) : Deferred<MetadataAwareResponse<ConversionTransfer>>
+        @Query("account_number_list[]") accountNumberList: List<String>,
+        @Query("statuses[]") statuses: List<String>
+    ): Deferred<MetadataAwareResponse<ConversionTransfer>>
 
     @PUT("transfer/rest/v1/conversion-transfers/{transferId}/sign")
     fun signConversionTransfer(
-        @Path("transferId")  conversionTransferId: String
-    ) : Deferred<ConversionTransfer>
+        @Path("transferId") conversionTransferId: String
+    ): Deferred<ConversionTransfer>
 
     @PUT("transfer/rest/v1/conversion-transfers/{transferId}/cancel")
     fun cancelConversionTransfer(
-        @Path("transferId")  conversionTransferId: String
-    ) : Deferred<ConversionTransfer>
+        @Path("transferId") conversionTransferId: String
+    ): Deferred<ConversionTransfer>
 
     // Issued payment card
 
@@ -224,4 +224,20 @@ interface NetworkApiClient {
         @Path("authorizationId") authorizationId: String,
         @Path("userId") userId: Int
     ): Deferred<Response<Void>>
+
+    @GET("issued-payment-card/v1/accounts/{accountNumber}/card-delivery-preference")
+    fun getPaymentCardDeliveryPreference(
+            @Path("accountNumber") accountNumber: String
+    ): Deferred<PaymentCardDelivery>
+
+    @PUT("issued-payment-card/v1/accounts/{accountNumber}/card-delivery-preference")
+    fun setPaymentCardDeliveryPreference(
+            @Path("accountNumber") accountNumber: String,
+            @Body paymentCardDelivery: PaymentCardDelivery
+    ): Deferred<PaymentCardDelivery>
+
+    @GET("issued-payment-card/v1/accounts/{accountNumber}/expiring-card-reorder-restriction")
+    fun getPaymentCardExpiringOrderRestriction(
+        @Path("accountNumber") accountNumber: String
+    ): Deferred<PaymentCardExpiringOrderRestriction>
 }
