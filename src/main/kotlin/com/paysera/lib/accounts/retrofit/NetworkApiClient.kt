@@ -47,7 +47,7 @@ interface NetworkApiClient {
         @Path("userId") userId: Int,
         @Query("offset") offset: Int?,
         @Query("limit") limit: Int?
-    ): Deferred<MetadataAwareResponse<Currency>>
+    ): Deferred<MetadataAwareResponse<AvailableCurrency>>
 
     // Questionnaire
 
