@@ -51,6 +51,11 @@ class AccountsApiClient(
             if (showHistoricalCurrencies) 1 else 0
         )
 
+    fun getAvailableCurrencies(userId: Int) =
+        networkApiClient.getAvailableCurrencies(
+            userId
+        )
+
     fun getCategorizedAccountNumbers(filter: CategorizedAccountNumbersFilter) =
         networkApiClient.getCategorizedAccountNumbers(
             filter.categories
