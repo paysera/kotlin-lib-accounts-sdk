@@ -44,7 +44,9 @@ interface NetworkApiClient {
 
     @GET("public/currency/rest/v1/available-currencies?user_id={userId}")
     fun getAvailableCurrencies(
-        @Path("userId") userId: Int
+        @Path("userId") userId: Int,
+        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int?
     ): Deferred<MetadataAwareResponse<Currency>>
 
     // Questionnaire
