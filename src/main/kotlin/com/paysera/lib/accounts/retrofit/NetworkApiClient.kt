@@ -42,7 +42,7 @@ interface NetworkApiClient {
         @Query("show_historical_currencies") showHistoricalCurrencies: Int
     ): Deferred<List<Balance>>
 
-    @GET("public/currency/rest/v1/available-currencies")
+    @GET("currency/rest/v1/available-currencies")
     fun getAvailableCurrencies(
         @Query("account_owner_user_id") userId: Int,
         @Query("offset") offset: Int?,
