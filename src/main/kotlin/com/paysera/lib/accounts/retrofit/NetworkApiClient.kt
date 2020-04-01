@@ -42,6 +42,13 @@ interface NetworkApiClient {
         @Query("show_historical_currencies") showHistoricalCurrencies: Int
     ): Deferred<List<Balance>>
 
+    @GET("currency/rest/v1/available-currencies")
+    fun getAvailableCurrencies(
+        @Query("account_owner_user_id") userId: Int,
+        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int?
+    ): Deferred<MetadataAwareResponse<AvailableCurrency>>
+
     // Questionnaire
 
     @GET("questionnaire/rest/v1/user/{userId}/questionnaire")
@@ -162,6 +169,13 @@ interface NetworkApiClient {
     fun getCardIssuePrice(
         @Query("card_account_owner_id") cardAccountOwnerId: Int,
         @Query("card_owner_id") cardOwnerId: Int
+    ): Deferred<CardIssuePrice>
+
+    @GET("issued-payment-card/v1/card-issue-price/{country}/{clientType}/{cardOwnerId}")
+    fun getCardIssuePrice(
+        @Path("country") country: String,
+        @Path("clientType") clientType: String,
+        @Path("cardOwnerId") cardOwnerId: Int
     ): Deferred<CardIssuePrice>
 
     @GET("issued-payment-card/v1/card-delivery-date")
