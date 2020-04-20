@@ -219,4 +219,6 @@ class AccountsApiClient(
             authorizationId,
             userId
         )
+
+    fun getUserSigningLimits(userId: Int) = networkApiClient.getUserSigningLimits(userId)
 }

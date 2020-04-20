@@ -3,6 +3,7 @@ package com.paysera.lib.accounts.retrofit
 import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
+import com.paysera.lib.accounts.entities.authorizations.UserLimits
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.entities.transfers.Transfer
@@ -224,4 +225,9 @@ interface NetworkApiClient {
         @Path("authorizationId") authorizationId: String,
         @Path("userId") userId: Int
     ): Deferred<Response<Void>>
+
+    @GET("permission/rest/v1/users/{userId}/limits")
+    fun getUserSigningLimits(
+        @Path("userId") userId: Int
+    ): Deferred<UserLimits>
 }
