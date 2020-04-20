@@ -2,6 +2,7 @@ package com.paysera.lib.accounts.clients
 
 import com.paysera.lib.accounts.entities.Account
 import com.paysera.lib.accounts.entities.CardLimit
+import com.paysera.lib.accounts.entities.AvailableCurrencyFilter
 import com.paysera.lib.accounts.entities.SetDefaultAccountDescriptionRequest
 import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
@@ -49,6 +50,13 @@ class AccountsApiClient(
         networkApiClient.getFullBalances(
             accountNumber,
             if (showHistoricalCurrencies) 1 else 0
+        )
+
+    fun getAvailableCurrencies(availableCurrencyFilter: AvailableCurrencyFilter) =
+        networkApiClient.getAvailableCurrencies(
+            availableCurrencyFilter.userId,
+            availableCurrencyFilter.offset,
+            availableCurrencyFilter.limit
         )
 
     fun getCategorizedAccountNumbers(filter: CategorizedAccountNumbersFilter) =
@@ -146,6 +154,12 @@ class AccountsApiClient(
             country
         )
 
+    fun getCardIssuePrice(cardAccountOwnerId: Int, cardOwnerId: Int) =
+        networkApiClient.getCardIssuePrice(
+            cardAccountOwnerId,
+            cardOwnerId
+        )
+
     fun getCardIssuePrice(country: String, clientType: String, cardOwnerId: Int) =
         networkApiClient.getCardIssuePrice(
             country,
@@ -218,6 +232,22 @@ class AccountsApiClient(
         networkApiClient.revokeUserAuthorization(
             authorizationId,
             userId
+        )
+
+    fun getPaymentCardDeliveryPreference(accountNumber: String) =
+        networkApiClient.getPaymentCardDeliveryPreference(
+            accountNumber
+        )
+
+    fun setPaymentCardDeliveryPreference(accountNumber: String, paymentCardDelivery: PaymentCardDelivery) =
+        networkApiClient.setPaymentCardDeliveryPreference(
+            accountNumber,
+            paymentCardDelivery
+        )
+
+    fun getPaymentCardExpiringOrderRestriction(accountNumber: String) =
+        networkApiClient.getPaymentCardExpiringOrderRestriction(
+            accountNumber
         )
 
     fun getUserSigningLimits(userId: Int) = networkApiClient.getUserSigningLimits(userId)
