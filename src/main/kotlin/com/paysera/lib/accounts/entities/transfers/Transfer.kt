@@ -2,7 +2,6 @@ package com.paysera.lib.accounts.entities.transfers
 
 import com.google.gson.annotations.JsonAdapter
 import com.paysera.lib.accounts.serializers.DateUnixTimestampSecondsAdapter
-import com.paysera.lib.accounts.serializers.MoneyAdapter
 import com.paysera.lib.accounts.serializers.TransferNotificationDeserializer
 import org.joda.money.Money
 import java.util.*
@@ -15,7 +14,6 @@ class Transfer {
 
     var id: String? = null
     var status: String? = null
-    @JsonAdapter(MoneyAdapter::class)
     var amount: Money? = null
     var beneficiary: TransferBeneficiary? = null
     var payer: TransferPayer? = null
