@@ -12,7 +12,6 @@ import com.paysera.lib.accounts.entities.cards.CardPin
 import com.paysera.lib.accounts.entities.cards.CategorizedAccountNumbers
 import com.paysera.lib.accounts.entities.cards.PaymentCardDesign
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
-import com.paysera.lib.accounts.entities.transfers.TransferNotification
 import com.paysera.lib.accounts.serializers.*
 import com.paysera.lib.common.entities.ApiCredentials
 import com.paysera.lib.common.entities.MetadataAwareResponse
@@ -34,8 +33,11 @@ class NetworkApiFactory(
     timeout,
     httpLoggingInterceptorLevel
 ) {
-    override fun createClient(baseUrl: String, tokenRefresher: TokenRefresherInterface?): AccountsApiClient {
-        createRetrofit(baseUrl, tokenRefresher).apply {
+    override val baseUrl = "https://accounts.paysera.com/public/"
+    override val certifiedHosts = listOf("accounts.paysera.com")
+
+    override fun createClient(tokenRefresher: TokenRefresherInterface?): AccountsApiClient {
+        createRetrofit(tokenRefresher).apply {
             return AccountsApiClient(
                 retrofit.create(NetworkApiClient::class.java),
                 apiRequestManager
@@ -58,7 +60,6 @@ class NetworkApiFactory(
         gsonBuilder.registerTypeAdapter(Money::class.java, MoneyDeserializer())
         gsonBuilder.registerTypeAdapter(CardPin::class.java, CardPinDeserializer())
         gsonBuilder.registerTypeAdapter(CardLimit::class.java, CardLimitSerializer())
-        gsonBuilder.registerTypeAdapter(TransferNotification::class.java, TransferNotificationDeserializer())
         gsonBuilder.registerTypeAdapter(Date::class.java, DateSerializer())
 
         object : TypeToken<MetadataAwareResponse<Authorization>>() {}.type.apply {

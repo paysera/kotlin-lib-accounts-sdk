@@ -3,6 +3,7 @@ package com.paysera.lib.accounts.retrofit
 import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
+import com.paysera.lib.accounts.entities.authorizations.UserLimits
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.entities.transfers.Transfer
@@ -41,6 +42,13 @@ interface NetworkApiClient {
         @Path("accountNumber") accountNumber: String,
         @Query("show_historical_currencies") showHistoricalCurrencies: Int
     ): Deferred<List<Balance>>
+
+    @GET("currency/rest/v1/available-currencies")
+    fun getAvailableCurrencies(
+        @Query("account_owner_user_id") userId: Int,
+        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int?
+    ): Deferred<MetadataAwareResponse<AvailableCurrency>>
 
     // Questionnaire
 
@@ -164,6 +172,13 @@ interface NetworkApiClient {
         @Query("card_owner_id") cardOwnerId: Int
     ): Deferred<CardIssuePrice>
 
+    @GET("issued-payment-card/v1/card-issue-price/{country}/{clientType}/{cardOwnerId}")
+    fun getCardIssuePrice(
+        @Path("country") country: String,
+        @Path("clientType") clientType: String,
+        @Path("cardOwnerId") cardOwnerId: Int
+    ): Deferred<CardIssuePrice>
+
     @GET("issued-payment-card/v1/card-delivery-date")
     fun getCardDeliveryDate(
         @Query("country") country: String,
@@ -239,4 +254,9 @@ interface NetworkApiClient {
     fun getPaymentCardExpiringOrderRestriction(
         @Path("accountNumber") accountNumber: String
     ): Deferred<PaymentCardExpiringOrderRestriction>
+
+    @GET("permission/rest/v1/users/{userId}/limits")
+    fun getUserSigningLimits(
+        @Path("userId") userId: Int
+    ): Deferred<UserLimits>
 }
