@@ -7,7 +7,7 @@ data class BullionOption(
     val type: String,
     val photos: List<String>,
     val weights: List<BullionOptionWeight>,
-    val fineness: Int,
+    val fineness: Float,
     val dimensions: String,
     val maker: String,
     val countryOfOrigin: String,
