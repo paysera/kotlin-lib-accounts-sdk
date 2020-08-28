@@ -3,6 +3,10 @@ package com.paysera.lib.accounts.retrofit
 import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
+import com.paysera.lib.accounts.entities.preciousMetals.UnallocatedBullionBalance
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
+import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.entities.transfers.Transfer
 import com.paysera.lib.common.entities.MetadataAwareResponse
@@ -268,4 +272,33 @@ interface NetworkApiClient {
         @Query("card_account_owner_id") cardAccountOwnerId: Int,
         @Query("card_owner_id") cardOwnerId: Int
     ): Deferred<MetadataAwareResponse<CardOrderRestriction>>
+
+    // Precious metals
+
+    @GET("bullion/rest/v1/item-options")
+    fun getBullionOptions(): MetadataAwareResponse<BullionOption>
+
+    @GET("bullion/rest/v1/items")
+    fun getBullionItems(
+        @Query("account_number") accountNumber: String,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?
+    )
+
+    @GET("bullion/rest/v1/unallocated-balance")
+    fun getPreciousMetalsUnallocatedBalance(
+        @Query("account_number") accountNumber: String,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?
+    ): MetadataAwareResponse<UnallocatedBullionBalance>
+
+    @POST("bullion/rest/v1/items/buy")
+    fun buyBullionItem(@Body request: BuyBullionItemRequest)
+
+    @POST("bullion/rest/v1/items/sell")
+    fun sellBullionItem(@Body request: SellBullionItemRequest)
 }

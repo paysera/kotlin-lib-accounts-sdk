@@ -9,6 +9,9 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidationRequest
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
+import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
 import com.paysera.lib.accounts.retrofit.NetworkApiClient
 import com.paysera.lib.common.entities.BaseFilter
@@ -262,5 +265,35 @@ class AccountsApiClient(
         networkApiClient.getCardOrderUserRestrictions(
             cardAccountOwnerId,
             cardOwnerId
+        )
+
+    fun getBullionOptions() = networkApiClient.getBullionOptions()
+
+    fun getBullionItems(filter: BullionFilter) =
+        networkApiClient.getBullionItems(
+            filter.accountNumber,
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection
+        )
+
+    fun getPreciousMetalsUnallocatedBalance(filter: BullionFilter) =
+        networkApiClient.getPreciousMetalsUnallocatedBalance(
+            filter.accountNumber,
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection
+        )
+
+    fun buyBullionItem(request: BuyBullionItemRequest) =
+        networkApiClient.buyBullionItem(
+            request
+        )
+
+    fun sellBullionItem(request: SellBullionItemRequest) =
+        networkApiClient.sellBullionItem(
+            request
         )
 }
