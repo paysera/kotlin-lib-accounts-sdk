@@ -276,7 +276,7 @@ interface NetworkApiClient {
     // Precious metals
 
     @GET("bullion/rest/v1/item-options")
-    fun getBullionOptions(): MetadataAwareResponse<BullionOption>
+    fun getBullionOptions(): Deferred<MetadataAwareResponse<BullionOption>>
 
     @GET("bullion/rest/v1/items")
     fun getBullionItems(
@@ -294,7 +294,7 @@ interface NetworkApiClient {
         @Query("offset") offset: Int?,
         @Query("order_by") orderBy: String?,
         @Query("order_direction") orderDirection: String?
-    ): MetadataAwareResponse<UnallocatedBullionBalance>
+    ): Deferred<MetadataAwareResponse<UnallocatedBullionBalance>>
 
     @POST("bullion/rest/v1/items/buy")
     fun buyBullionItem(@Body request: BuyBullionItemRequest)
