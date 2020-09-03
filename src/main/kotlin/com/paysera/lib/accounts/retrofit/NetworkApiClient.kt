@@ -297,8 +297,8 @@ interface NetworkApiClient {
     ): Deferred<MetadataAwareResponse<UnallocatedBullionBalance>>
 
     @POST("bullion/rest/v1/items/buy")
-    fun buyBullionItem(@Body request: BuyBullionItemRequest)
+    fun buyBullionItem(@Body request: BuyBullionItemRequest) : Deferred<Response<Void>>
 
     @POST("bullion/rest/v1/items/sell")
-    fun sellBullionItem(@Body request: SellBullionItemRequest)
+    fun sellBullionItem(@Body request: SellBullionItemRequest) : Deferred<Response<Void>>
 }
