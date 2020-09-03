@@ -3,6 +3,7 @@ package com.paysera.lib.accounts.retrofit
 import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.preciousMetals.Bullion
 import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
 import com.paysera.lib.accounts.entities.preciousMetals.UnallocatedBullionBalance
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
@@ -276,7 +277,12 @@ interface NetworkApiClient {
     // Precious metals
 
     @GET("bullion/rest/v1/item-options")
-    fun getBullionOptions(): Deferred<MetadataAwareResponse<BullionOption>>
+    fun getBullionOptions(
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?
+    ): Deferred<MetadataAwareResponse<BullionOption>>
 
     @GET("bullion/rest/v1/items")
     fun getBullionItems(
@@ -285,7 +291,7 @@ interface NetworkApiClient {
         @Query("offset") offset: Int?,
         @Query("order_by") orderBy: String?,
         @Query("order_direction") orderDirection: String?
-    )
+    ) : Deferred<MetadataAwareResponse<Bullion>>
 
     @GET("bullion/rest/v1/unallocated-balance")
     fun getPreciousMetalsUnallocatedBalance(

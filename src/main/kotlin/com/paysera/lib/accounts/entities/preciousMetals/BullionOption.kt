@@ -7,12 +7,15 @@ data class BullionOption(
     val type: String,
     val photos: List<String>,
     val weights: List<BullionOptionWeight>,
-    val fineness: Float,
+    val fineness: Double,
     val dimensions: String,
+    val diameter: Double,
+    val edge: Double,
     val maker: String,
     val countryOfOrigin: String,
     val preciousMetalType: String,
-    val purchaseAmount: Money
+    val purchaseAmount: Money,
+    val availableForPurchase: Boolean
 ) {
 
     object BullionOptionType {

@@ -10,6 +10,7 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidat
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
+import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionOptionsFilter
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
@@ -267,7 +268,13 @@ class AccountsApiClient(
             cardOwnerId
         )
 
-    fun getBullionOptions() = networkApiClient.getBullionOptions()
+    fun getBullionOptions(filter: BullionOptionsFilter) =
+        networkApiClient.getBullionOptions(
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection
+        )
 
     fun getBullionItems(filter: BullionFilter) =
         networkApiClient.getBullionItems(
