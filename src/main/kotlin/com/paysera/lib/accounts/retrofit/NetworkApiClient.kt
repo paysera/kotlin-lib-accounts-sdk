@@ -4,6 +4,7 @@ import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.preciousMetals.Bullion
+import com.paysera.lib.accounts.entities.preciousMetals.BullionDealingCosts
 import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
 import com.paysera.lib.accounts.entities.preciousMetals.UnallocatedBullionBalance
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
@@ -307,4 +308,12 @@ interface NetworkApiClient {
 
     @POST("bullion/rest/v1/items/sell")
     fun sellBullionItem(@Body request: SellBullionItemRequest) : Deferred<Response<Void>>
+
+    @GET("currency-exchange/rest/v1/currency-exchanges/spread-percentage")
+    fun getPreciousMetalsDealingCosts(
+        @Query("account_number") accountNumber: String,
+        @Query("from_currency") fromCurrency: String,
+        @Query("to_currency") toCurrency: String,
+        @Query("to_amount") toAmount: String
+    ): Deferred<BullionDealingCosts>
 }

@@ -11,6 +11,7 @@ import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationReque
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionOptionsFilter
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionDealingCostsRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
@@ -302,5 +303,13 @@ class AccountsApiClient(
     fun sellBullionItem(request: SellBullionItemRequest) =
         networkApiClient.sellBullionItem(
             request
+        )
+
+    fun sellBullionItem(request: BullionDealingCostsRequest) =
+        networkApiClient.getPreciousMetalsDealingCosts(
+            request.accountNumber,
+            request.fromCurrency,
+            request.toCurrency,
+            request.toAmount
         )
 }
