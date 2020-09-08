@@ -305,7 +305,7 @@ class AccountsApiClient(
             request
         )
 
-    fun sellBullionItem(request: BullionDealingCostsRequest) =
+    fun getPreciousMetalsDealingCosts(request: BullionDealingCostsRequest) =
         networkApiClient.getPreciousMetalsDealingCosts(
             request.accountNumber,
             request.fromCurrency,
