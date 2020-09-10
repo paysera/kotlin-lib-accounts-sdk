@@ -2,9 +2,12 @@ package com.paysera.lib.accounts.clients
 
 import com.paysera.lib.accounts.retrofit.NetworkApiFactory
 import com.paysera.lib.common.entities.ApiCredentials
+import com.paysera.lib.common.exceptions.ApiError
+import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -23,6 +26,11 @@ open class BaseTest {
         private val timeout: Long? = null
         private val loggingLevel = HttpLoggingInterceptor.Level.BODY
 
+        private val errorLoggerInterface = object : ErrorLoggerInterface {
+            override fun log(request: Request, error: ApiError) {
+                //  log
+            }
+        }
         private val tokenRefresher = object : TokenRefresherInterface {
             override fun refreshToken(): Deferred<Any> {
                 return CompletableDeferred(1)
@@ -35,10 +43,13 @@ open class BaseTest {
     @BeforeAll
     open fun setUp() {
         apiClient = NetworkApiFactory(
-            userAgent,
-            apiCredentials,
-            timeout,
-            loggingLevel
+            baseUrl = "https://accounts.paysera.com/public/",
+            userAgent = userAgent,
+            credentials = apiCredentials,
+            certifiedHosts = listOf("accounts.paysera.com"),
+            timeout = timeout,
+            httpLoggingInterceptorLevel = loggingLevel,
+            errorLogger = errorLoggerInterface
         ).createClient(tokenRefresher)
     }
 
