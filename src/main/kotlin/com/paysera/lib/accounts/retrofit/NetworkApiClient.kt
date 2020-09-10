@@ -5,6 +5,7 @@ import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.entities.transfers.Transfer
+import com.paysera.lib.accounts.entities.transfers.TransferBankParticipationInformation
 import com.paysera.lib.common.entities.MetadataAwareResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -268,4 +269,9 @@ interface NetworkApiClient {
         @Query("card_account_owner_id") cardAccountOwnerId: Int,
         @Query("card_owner_id") cardOwnerId: Int
     ): Deferred<MetadataAwareResponse<CardOrderRestriction>>
+
+    @GET("transfer/rest/v1/bank-participation/{swift}")
+    fun getBankParticipationInformation(
+        @Path("swift") swift: String
+    ): Deferred<TransferBankParticipationInformation>
 }

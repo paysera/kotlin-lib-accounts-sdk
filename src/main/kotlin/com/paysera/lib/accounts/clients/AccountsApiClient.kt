@@ -263,4 +263,7 @@ class AccountsApiClient(
             cardAccountOwnerId,
             cardOwnerId
         )
+
+    fun getBankParticipationInformation(swift: String) =
+        networkApiClient.getBankParticipationInformation(swift)
 }
