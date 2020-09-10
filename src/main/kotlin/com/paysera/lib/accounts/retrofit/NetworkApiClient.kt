@@ -295,7 +295,7 @@ interface NetworkApiClient {
     ) : Deferred<MetadataAwareResponse<Bullion>>
 
     @GET("bullion/rest/v1/unallocated-balance")
-    fun getPreciousMetalsUnallocatedBalance(
+    fun getUnallocatedBullionBalance(
         @Query("account_number") accountNumber: String,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
@@ -304,13 +304,13 @@ interface NetworkApiClient {
     ): Deferred<MetadataAwareResponse<UnallocatedBullionBalance>>
 
     @POST("bullion/rest/v1/items/buy")
-    fun buyBullionItem(@Body request: BuyBullionItemRequest) : Deferred<Response<Void>>
+    fun buyBullion(@Body request: BuyBullionItemRequest) : Deferred<Response<Void>>
 
     @POST("bullion/rest/v1/items/sell")
-    fun sellBullionItem(@Body request: SellBullionItemRequest) : Deferred<Response<Void>>
+    fun sellBullion(@Body request: SellBullionItemRequest) : Deferred<Response<Void>>
 
     @GET("currency-exchange/rest/v1/currency-exchanges/spread-percentage")
-    fun getPreciousMetalsDealingCosts(
+    fun getBullionSpreadPercentage(
         @Query("account_number") accountNumber: String,
         @Query("from_currency") fromCurrency: String,
         @Query("to_currency") toCurrency: String,

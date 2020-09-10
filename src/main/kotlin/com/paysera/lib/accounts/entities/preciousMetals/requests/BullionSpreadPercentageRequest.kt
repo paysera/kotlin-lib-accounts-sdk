@@ -1,6 +1,6 @@
 package com.paysera.lib.accounts.entities.preciousMetals.requests
 
-data class BullionDealingCostsRequest(
+data class BullionSpreadPercentageRequest(
     val accountNumber: String,
     val fromCurrency: String,
     val toCurrency: String,

@@ -18,8 +18,8 @@ data class BullionOption(
     val availableForPurchase: Boolean
 ) {
 
-    object BullionOptionType {
-        const val BAR = "bar"
-        const val COIN = "coin"
+    enum class BullionOptionType(val value: String) {
+        BAR("bar"),
+        COIN("coin")
     }
 }

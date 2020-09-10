@@ -10,8 +10,7 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidat
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
-import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionOptionsFilter
-import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionDealingCostsRequest
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionSpreadPercentageRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
@@ -269,7 +268,7 @@ class AccountsApiClient(
             cardOwnerId
         )
 
-    fun getBullionOptions(filter: BullionOptionsFilter) =
+    fun getBullionOptions(filter: BaseFilter) =
         networkApiClient.getBullionOptions(
             filter.limit,
             filter.offset,
@@ -286,8 +285,8 @@ class AccountsApiClient(
             filter.orderDirection
         )
 
-    fun getPreciousMetalsUnallocatedBalance(filter: BullionFilter) =
-        networkApiClient.getPreciousMetalsUnallocatedBalance(
+    fun getUnallocatedBullionBalance(filter: BullionFilter) =
+        networkApiClient.getUnallocatedBullionBalance(
             filter.accountNumber,
             filter.limit,
             filter.offset,
@@ -295,18 +294,18 @@ class AccountsApiClient(
             filter.orderDirection
         )
 
-    fun buyBullionItem(request: BuyBullionItemRequest) =
-        networkApiClient.buyBullionItem(
+    fun buyBullion(request: BuyBullionItemRequest) =
+        networkApiClient.buyBullion(
             request
         )
 
-    fun sellBullionItem(request: SellBullionItemRequest) =
-        networkApiClient.sellBullionItem(
+    fun sellBullion(request: SellBullionItemRequest) =
+        networkApiClient.sellBullion(
             request
         )
 
-    fun getPreciousMetalsDealingCosts(request: BullionDealingCostsRequest) =
-        networkApiClient.getPreciousMetalsDealingCosts(
+    fun getBullionSpreadPercentage(request: BullionSpreadPercentageRequest) =
+        networkApiClient.getBullionSpreadPercentage(
             request.accountNumber,
             request.fromCurrency,
             request.toCurrency,
