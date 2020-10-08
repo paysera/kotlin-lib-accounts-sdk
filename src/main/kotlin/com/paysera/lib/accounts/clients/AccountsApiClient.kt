@@ -9,6 +9,10 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidationRequest
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.informationRequests.InformationRequest
+import com.paysera.lib.accounts.entities.informationRequests.InformationRequestAnswers
+import com.paysera.lib.accounts.entities.informationRequests.InformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.filters.InformationRequestFilter
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionSpreadPercentageRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
@@ -314,4 +318,44 @@ class AccountsApiClient(
 
     fun getBankParticipationInformation(swift: String) =
         networkApiClient.getBankParticipationInformation(swift)
+
+    fun getInformationRequests(filter: InformationRequestFilter) =
+        networkApiClient.getInformationRequests(
+            filter.transferId,
+            filter.accountNumbers,
+            filter.status,
+            filter.internalCommentRequired,
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection,
+            filter.after,
+            filter.before
+        )
+
+    fun getInformationRequest(informationRequestId: String) =
+        networkApiClient.getInformationRequest(
+            informationRequestId
+        )
+
+    fun createInformationRequest(informationRequest: InformationRequest) =
+        networkApiClient.createInformationRequest(
+            informationRequest
+        )
+
+    fun uploadInformationRequestFiles(
+        informationRequestId: String,
+        file: InformationRequestFile
+    ) = networkApiClient.uploadInformationRequestFiles(
+        informationRequestId,
+        file
+    )
+
+    fun answerInformationRequestQuestions(
+        informationRequestId: String,
+        answers: InformationRequestAnswers
+    ) = networkApiClient.answerInformationRequestQuestions(
+        informationRequestId,
+        answers
+    )
 }
