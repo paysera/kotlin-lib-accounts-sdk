@@ -46,9 +46,10 @@ class AccountsApiClient(
             accountNumber
         )
 
-    fun getIbanInformation(iban: String) =
+    fun getIbanInformation(iban: String, currency: String) =
         networkApiClient.getIbanInformation(
-            iban
+            iban,
+            currency
         )
 
     fun getFullBalance(accountNumber: String, showHistoricalCurrencies: Boolean = false) =
