@@ -11,7 +11,7 @@ internal class TransferTest : BaseTest() {
     private val testTransferId = "abc"
     private val testIban = "LT....."
     private val swift = "RZBMRUMR..."
-    private val currency = ""
+    private val currency = "EUR"
 
     @Test
     fun getTransfer() {

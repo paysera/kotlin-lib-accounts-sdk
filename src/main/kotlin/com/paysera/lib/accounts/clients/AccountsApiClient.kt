@@ -46,6 +46,11 @@ class AccountsApiClient(
             accountNumber
         )
 
+    fun getIbanInformation(iban: String) =
+        networkApiClient.getIbanInformation(
+            iban
+        )
+
     fun getIbanInformation(iban: String, currency: String) =
         networkApiClient.getIbanInformation(
             iban,
