@@ -14,7 +14,8 @@ data class InformationRequest(
     val notifyClientBy: List<String>?,
     val questions: List<InformationRequestQuestion>,
     val requestedFrom: String,
-    val files: List<InformationRequestFile>?
+    val files: List<InformationRequestFile>?,
+    val requestedDocuments: RequestedDocuments
 ) {
 
     enum class InformationRequestStatus(val value: String) {

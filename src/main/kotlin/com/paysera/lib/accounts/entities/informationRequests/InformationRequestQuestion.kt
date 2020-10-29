@@ -8,9 +8,8 @@ data class InformationRequestQuestion(
     val answer: String?
 ) {
     enum class InformationRequestQuestionInputType(val value: String) {
-        TEXT("text"),
-        TEXT_AREA("textarea"),
-        DATE("date"),
-        FILE("file")
+        INPUT_TYPE_TEXT("text"),
+        INPUT_TYPE_TEXT_AREA("textarea"),
+        INPUT_TYPE_DATE("date")
     }
 }
