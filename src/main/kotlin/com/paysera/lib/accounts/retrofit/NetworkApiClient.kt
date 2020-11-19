@@ -335,7 +335,7 @@ interface NetworkApiClient {
     @GET("transfer-aml-information/rest/v1/information-requests")
     fun getInformationRequests(
         @Query("transfer_id") transferId: String?,
-        @Query("account_numbers") accountNumbers: List<String>?,
+        @Query("account_numbers[]") accountNumbers: List<String>?,
         @Query("status") status: String?,
         @Query("internal_comment_required") internalCommentRequired: Boolean?,
         @Query("limit") limit: Int?,
