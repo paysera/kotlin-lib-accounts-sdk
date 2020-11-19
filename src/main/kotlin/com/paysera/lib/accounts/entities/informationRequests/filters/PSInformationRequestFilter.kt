@@ -2,7 +2,7 @@ package com.paysera.lib.accounts.entities.informationRequests.filters
 
 import com.paysera.lib.common.entities.BaseFilter
 
-class InformationRequestFilter(
+class PSInformationRequestFilter(
     val transferId: String? = null,
     val accountNumbers: List<String>? = null,
     val status: String? = null,

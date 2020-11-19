@@ -3,9 +3,9 @@ package com.paysera.lib.accounts.retrofit
 import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
-import com.paysera.lib.accounts.entities.informationRequests.InformationRequest
-import com.paysera.lib.accounts.entities.informationRequests.InformationRequestAnswers
-import com.paysera.lib.accounts.entities.informationRequests.InformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
 import com.paysera.lib.accounts.entities.preciousMetals.Bullion
 import com.paysera.lib.accounts.entities.preciousMetals.BullionDealingCosts
 import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
@@ -344,27 +344,27 @@ interface NetworkApiClient {
         @Query("order_direction") orderDirection: String?,
         @Query("after") after: String?,
         @Query("before") before: String?
-    ): Deferred<MetadataAwareResponse<InformationRequest>>
+    ): Deferred<MetadataAwareResponse<PSInformationRequest>>
 
     @GET("transfer-aml-information/rest/v1/information-requests/{id}")
     fun getInformationRequest(
         @Path("id") informationRequestId: String
-    ): Deferred<InformationRequest>
+    ): Deferred<PSInformationRequest>
 
     @POST("transfer-aml-information/rest/v1/information-requests")
     fun createInformationRequest(
-        @Body informationRequest: InformationRequest
-    ): Deferred<InformationRequest>
+        @Body informationRequest: PSInformationRequest
+    ): Deferred<PSInformationRequest>
 
     @POST("transfer-aml-information/rest/v1/information-requests/{id}/files")
     fun uploadInformationRequestFiles(
         @Path("id") informationRequestId: String,
-        @Body file: InformationRequestFile
+        @Body file: PSInformationRequestFile
     ): Deferred<Unit>
 
     @PUT("transfer-aml-information/rest/v1/information-requests/{id}/answer")
     fun answerInformationRequestQuestions(
         @Path("id") informationRequestId: String,
-        @Body answers: InformationRequestAnswers
-    ): Deferred<InformationRequest>
+        @Body answers: PSInformationRequestAnswers
+    ): Deferred<PSInformationRequest>
 }

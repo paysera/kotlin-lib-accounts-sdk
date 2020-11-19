@@ -4,7 +4,7 @@ import com.paysera.lib.accounts.entities.transfers.TransferBeneficiary
 import org.joda.money.Money
 import java.util.*
 
-data class TransferInformation(
+data class PSTransferInformation(
     val amount: Money,
     val direction: String,
     val otherParty: TransferBeneficiary,

@@ -9,10 +9,10 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidationRequest
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
-import com.paysera.lib.accounts.entities.informationRequests.InformationRequest
-import com.paysera.lib.accounts.entities.informationRequests.InformationRequestAnswers
-import com.paysera.lib.accounts.entities.informationRequests.InformationRequestFile
-import com.paysera.lib.accounts.entities.informationRequests.filters.InformationRequestFilter
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.filters.PSInformationRequestFilter
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionSpreadPercentageRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
@@ -325,7 +325,7 @@ class AccountsApiClient(
     fun getBankParticipationInformation(swift: String) =
         networkApiClient.getBankParticipationInformation(swift)
 
-    fun getInformationRequests(filter: InformationRequestFilter) =
+    fun getInformationRequests(filter: PSInformationRequestFilter) =
         networkApiClient.getInformationRequests(
             filter.transferId,
             filter.accountNumbers,
@@ -344,14 +344,14 @@ class AccountsApiClient(
             informationRequestId
         )
 
-    fun createInformationRequest(informationRequest: InformationRequest) =
+    fun createInformationRequest(informationRequest: PSInformationRequest) =
         networkApiClient.createInformationRequest(
             informationRequest
         )
 
     fun uploadInformationRequestFiles(
         informationRequestId: String,
-        file: InformationRequestFile
+        file: PSInformationRequestFile
     ) = networkApiClient.uploadInformationRequestFiles(
         informationRequestId,
         file
@@ -359,7 +359,7 @@ class AccountsApiClient(
 
     fun answerInformationRequestQuestions(
         informationRequestId: String,
-        answers: InformationRequestAnswers
+        answers: PSInformationRequestAnswers
     ) = networkApiClient.answerInformationRequestQuestions(
         informationRequestId,
         answers
