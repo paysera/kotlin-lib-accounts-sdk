@@ -325,6 +325,8 @@ class AccountsApiClient(
     fun getBankParticipationInformation(swift: String) =
         networkApiClient.getBankParticipationInformation(swift)
 
+    fun getClientAllowances() = networkApiClient.getClientAllowances()
+
     fun getInformationRequests(filter: PSInformationRequestFilter) =
         networkApiClient.getInformationRequests(
             filter.transferId,

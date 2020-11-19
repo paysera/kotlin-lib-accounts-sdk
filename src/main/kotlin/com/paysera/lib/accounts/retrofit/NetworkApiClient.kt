@@ -3,6 +3,7 @@ package com.paysera.lib.accounts.retrofit
 import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.clientAllowances.PSClientAllowances
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
@@ -331,6 +332,9 @@ interface NetworkApiClient {
     fun getBankParticipationInformation(
         @Path("swift") swift: String
     ): Deferred<TransferBankParticipationInformation>
+
+    @GET("client-allowance/rest/v1/client-allowances")
+    fun getClientAllowances(): Deferred<List<PSClientAllowances>>
 
     @GET("transfer-aml-information/rest/v1/information-requests")
     fun getInformationRequests(
