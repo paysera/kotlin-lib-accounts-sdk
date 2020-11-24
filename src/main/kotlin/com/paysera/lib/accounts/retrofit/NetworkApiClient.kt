@@ -7,6 +7,7 @@ import com.paysera.lib.accounts.entities.clientAllowances.PSClientAllowances
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestUploadedFile
 import com.paysera.lib.accounts.entities.preciousMetals.Bullion
 import com.paysera.lib.accounts.entities.preciousMetals.BullionDealingCosts
 import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
@@ -361,10 +362,10 @@ interface NetworkApiClient {
     ): Deferred<PSInformationRequest>
 
     @POST("transfer-aml-information/rest/v1/information-requests/{id}/files")
-    fun uploadInformationRequestFiles(
+    fun uploadInformationRequestFile(
         @Path("id") informationRequestId: String,
         @Body file: PSInformationRequestFile
-    ): Deferred<Unit>
+    ): Deferred<PSInformationRequestUploadedFile>
 
     @PUT("transfer-aml-information/rest/v1/information-requests/{id}/answer")
     fun answerInformationRequestQuestions(

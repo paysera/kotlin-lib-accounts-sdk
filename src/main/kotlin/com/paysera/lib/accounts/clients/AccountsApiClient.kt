@@ -351,10 +351,10 @@ class AccountsApiClient(
             informationRequest
         )
 
-    fun uploadInformationRequestFiles(
+    fun uploadInformationRequestFile(
         informationRequestId: String,
         file: PSInformationRequestFile
-    ) = networkApiClient.uploadInformationRequestFiles(
+    ) = networkApiClient.uploadInformationRequestFile(
         informationRequestId,
         file
     )

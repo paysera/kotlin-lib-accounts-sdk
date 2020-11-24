@@ -5,7 +5,7 @@ import java.util.*
 data class PSInformationRequest(
     val id: String,
     val transferId: String,
-    val transferInformation: PSTransferInformation?,
+    val transferInformation: PSTransferInformation,
     val internalComment: String?,
     val comment: String?,
     val status: String,
@@ -14,6 +14,6 @@ data class PSInformationRequest(
     val notifyClientBy: List<String>?,
     val questions: List<PSInformationRequestQuestion>,
     val requestedFrom: String,
-    val files: List<PSInformationRequestFile>?,
+    val files: List<PSInformationRequestUploadedFile>?,
     val requestedDocuments: PSRequestedDocuments
 )
