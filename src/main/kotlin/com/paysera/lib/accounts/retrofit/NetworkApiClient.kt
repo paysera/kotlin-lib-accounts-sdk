@@ -336,5 +336,5 @@ interface NetworkApiClient {
     @PUT("issued-payment-card/v1/cards/{id}/unblock-cvv")
     fun unblockCvv(
         @Path("id") cardId: String
-    ): Deferred<Response<Void>>
+    ): Deferred<Card>
 }
