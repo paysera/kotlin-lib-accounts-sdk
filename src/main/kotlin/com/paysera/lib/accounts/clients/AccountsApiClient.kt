@@ -327,6 +327,8 @@ class AccountsApiClient(
 
     fun getClientAllowances() = networkApiClient.getClientAllowances()
 
+    fun unblockCardCvv(cardId: String) = networkApiClient.unblockCvv(cardId)
+
     fun getInformationRequests(filter: PSInformationRequestFilter) =
         networkApiClient.getInformationRequests(
             filter.transferId,

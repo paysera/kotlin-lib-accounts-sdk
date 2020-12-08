@@ -337,6 +337,11 @@ interface NetworkApiClient {
     @GET("client-allowance/rest/v1/client-allowances")
     fun getClientAllowances(): Deferred<List<PSClientAllowances>>
 
+    @PUT("issued-payment-card/v1/cards/{id}/unblock-cvv")
+    fun unblockCvv(
+        @Path("id") cardId: String
+    ): Deferred<Card>
+
     @GET("transfer-aml-information/rest/v1/information-requests")
     fun getInformationRequests(
         @Query("transfer_id") transferId: String?,
