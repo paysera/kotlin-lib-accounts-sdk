@@ -20,6 +20,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    maven { url 'https://dl.bintray.com/babylonpartners/maven' }
 }
 
 dependencies {
@@ -29,12 +30,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+    implementation 'com.babylon.certificatetransparency:certificatetransparency:0.3.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'org.joda:joda-money:0.12'
 
-    implementation 'com.github.paysera:kotlin-lib-common-sdk:2.2.1'
+    implementation 'com.github.paysera:kotlin-lib-common-sdk:2.3.0'
 
     testImplementation(
             'org.assertj:assertj-core:3.12.2',
