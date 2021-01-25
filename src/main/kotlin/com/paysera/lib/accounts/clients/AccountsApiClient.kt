@@ -1,13 +1,22 @@
 package com.paysera.lib.accounts.clients
 
 import com.paysera.lib.accounts.entities.Account
-import com.paysera.lib.accounts.entities.CardLimit
 import com.paysera.lib.accounts.entities.AvailableCurrencyFilter
+import com.paysera.lib.accounts.entities.CardLimit
 import com.paysera.lib.accounts.entities.SetDefaultAccountDescriptionRequest
 import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
+import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidationRequest
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.filters.PSInformationRequestFilter
+import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionSpreadPercentageRequest
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
+import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
 import com.paysera.lib.accounts.retrofit.NetworkApiClient
 import com.paysera.lib.common.entities.BaseFilter
@@ -44,6 +53,12 @@ class AccountsApiClient(
     fun getIbanInformation(iban: String) =
         networkApiClient.getIbanInformation(
             iban
+        )
+
+    fun getIbanInformation(iban: String, currency: String) =
+        networkApiClient.getIbanInformation(
+            iban,
+            currency
         )
 
     fun getFullBalance(accountNumber: String, showHistoricalCurrencies: Boolean = false) =
@@ -251,4 +266,106 @@ class AccountsApiClient(
         )
 
     fun getUserSigningLimits(userId: Int) = networkApiClient.getUserSigningLimits(userId)
+
+    fun getAuthorizationUserValidations(body: AuthorizationUserValidationRequest) =
+        networkApiClient.getAuthorizationUserValidations(
+            body
+        )
+
+    fun getCardOrderUserRestrictions(cardAccountOwnerId: Int, cardOwnerId: Int) =
+        networkApiClient.getCardOrderUserRestrictions(
+            cardAccountOwnerId,
+            cardOwnerId
+        )
+
+    fun getBullionOptions(filter: BaseFilter) =
+        networkApiClient.getBullionOptions(
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection
+        )
+
+    fun getBullionItems(filter: BullionFilter) =
+        networkApiClient.getBullionItems(
+            filter.accountNumber,
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection
+        )
+
+    fun getUnallocatedBullionBalance(filter: BullionFilter) =
+        networkApiClient.getUnallocatedBullionBalance(
+            filter.accountNumber,
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection
+        )
+
+    fun buyBullion(request: BuyBullionItemRequest) =
+        networkApiClient.buyBullion(
+            request
+        )
+
+    fun sellBullion(request: SellBullionItemRequest) =
+        networkApiClient.sellBullion(
+            request
+        )
+
+    fun getBullionSpreadPercentage(request: BullionSpreadPercentageRequest) =
+        networkApiClient.getBullionSpreadPercentage(
+            request.accountNumber,
+            request.fromCurrency,
+            request.toCurrency,
+            request.toAmount
+        )
+
+    fun getBankParticipationInformation(swift: String) =
+        networkApiClient.getBankParticipationInformation(swift)
+
+    fun getClientAllowances() = networkApiClient.getClientAllowances()
+
+    fun unblockCardCvv(cardId: String) = networkApiClient.unblockCvv(cardId)
+
+    fun getInformationRequests(filter: PSInformationRequestFilter) =
+        networkApiClient.getInformationRequests(
+            filter.transferId,
+            filter.accountNumbers,
+            filter.status,
+            filter.internalCommentRequired,
+            filter.limit,
+            filter.offset,
+            filter.orderBy,
+            filter.orderDirection,
+            filter.after,
+            filter.before
+        )
+
+    fun getInformationRequest(informationRequestId: String) =
+        networkApiClient.getInformationRequest(
+            informationRequestId
+        )
+
+    fun createInformationRequest(informationRequest: PSInformationRequest) =
+        networkApiClient.createInformationRequest(
+            informationRequest
+        )
+
+    fun uploadInformationRequestFile(
+        informationRequestId: String,
+        file: PSInformationRequestFile
+    ) = networkApiClient.uploadInformationRequestFile(
+        informationRequestId,
+        file
+    )
+
+    fun answerInformationRequestQuestions(
+        informationRequestId: String,
+        answers: PSInformationRequestAnswers
+    ) = networkApiClient.answerInformationRequestQuestions(
+        informationRequestId,
+        answers
+    )
 }

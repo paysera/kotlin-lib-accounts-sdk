@@ -1,12 +1,22 @@
 package com.paysera.lib.accounts.retrofit
 
 import com.paysera.lib.accounts.entities.*
-import com.paysera.lib.accounts.entities.authorizations.Authorization
-import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
-import com.paysera.lib.accounts.entities.authorizations.UserLimits
+import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.clientAllowances.PSClientAllowances
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestUploadedFile
+import com.paysera.lib.accounts.entities.preciousMetals.Bullion
+import com.paysera.lib.accounts.entities.preciousMetals.BullionDealingCosts
+import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
+import com.paysera.lib.accounts.entities.preciousMetals.UnallocatedBullionBalance
+import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
+import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.entities.transfers.Transfer
+import com.paysera.lib.accounts.entities.transfers.TransferBankParticipationInformation
 import com.paysera.lib.common.entities.MetadataAwareResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -67,6 +77,12 @@ interface NetworkApiClient {
     @GET("transfer/rest/v1/bank-information/{iban}")
     fun getIbanInformation(
         @Path("iban") iban: String
+    ): Deferred<IbanInformation>
+
+    @GET("transfer/rest/v1/bank-information/{iban}")
+    fun getIbanInformation(
+        @Path("iban") iban: String,
+        @Query("currency") currency: String
     ): Deferred<IbanInformation>
 
     @GET("transfer/rest/v1/categorized-account-numbers")
@@ -259,4 +275,106 @@ interface NetworkApiClient {
     fun getUserSigningLimits(
         @Path("userId") userId: Int
     ): Deferred<UserLimits>
+
+    @PUT("permission/rest/v1/authorizations/authorization-user-validation")
+    fun getAuthorizationUserValidations(
+        @Body body: AuthorizationUserValidationRequest
+    ): Deferred<MetadataAwareResponse<UserValidationResult>>
+
+    @GET("issued-payment-card/v1/card-order-restrictions")
+    fun getCardOrderUserRestrictions(
+        @Query("card_account_owner_id") cardAccountOwnerId: Int,
+        @Query("card_owner_id") cardOwnerId: Int
+    ): Deferred<MetadataAwareResponse<CardOrderRestriction>>
+
+    // Precious metals
+
+    @GET("bullion/rest/v1/item-options")
+    fun getBullionOptions(
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?
+    ): Deferred<MetadataAwareResponse<BullionOption>>
+
+    @GET("bullion/rest/v1/items")
+    fun getBullionItems(
+        @Query("account_number") accountNumber: String,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?
+    ) : Deferred<MetadataAwareResponse<Bullion>>
+
+    @GET("bullion/rest/v1/unallocated-balance")
+    fun getUnallocatedBullionBalance(
+        @Query("account_number") accountNumber: String,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?
+    ): Deferred<MetadataAwareResponse<UnallocatedBullionBalance>>
+
+    @POST("bullion/rest/v1/items/buy")
+    fun buyBullion(@Body request: BuyBullionItemRequest) : Deferred<Response<Void>>
+
+    @POST("bullion/rest/v1/items/sell")
+    fun sellBullion(@Body request: SellBullionItemRequest) : Deferred<Response<Void>>
+
+    @GET("currency-exchange/rest/v1/currency-exchanges/spread-percentage")
+    fun getBullionSpreadPercentage(
+        @Query("account_number") accountNumber: String,
+        @Query("from_currency") fromCurrency: String,
+        @Query("to_currency") toCurrency: String,
+        @Query("to_amount") toAmount: String
+    ): Deferred<BullionDealingCosts>
+
+    @GET("transfer/rest/v1/bank-participation/{swift}")
+    fun getBankParticipationInformation(
+        @Path("swift") swift: String
+    ): Deferred<TransferBankParticipationInformation>
+
+    @GET("client-allowance/rest/v1/client-allowances")
+    fun getClientAllowances(): Deferred<List<PSClientAllowances>>
+
+    @PUT("issued-payment-card/v1/cards/{id}/unblock-cvv")
+    fun unblockCvv(
+        @Path("id") cardId: String
+    ): Deferred<Card>
+
+    @GET("transfer-aml-information/rest/v1/information-requests")
+    fun getInformationRequests(
+        @Query("transfer_id") transferId: String?,
+        @Query("account_numbers[]") accountNumbers: List<String>?,
+        @Query("status") status: String?,
+        @Query("internal_comment_required") internalCommentRequired: Boolean?,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?,
+        @Query("after") after: String?,
+        @Query("before") before: String?
+    ): Deferred<MetadataAwareResponse<PSInformationRequest>>
+
+    @GET("transfer-aml-information/rest/v1/information-requests/{id}")
+    fun getInformationRequest(
+        @Path("id") informationRequestId: String
+    ): Deferred<PSInformationRequest>
+
+    @POST("transfer-aml-information/rest/v1/information-requests")
+    fun createInformationRequest(
+        @Body informationRequest: PSInformationRequest
+    ): Deferred<PSInformationRequest>
+
+    @POST("transfer-aml-information/rest/v1/information-requests/{id}/files")
+    fun uploadInformationRequestFile(
+        @Path("id") informationRequestId: String,
+        @Body file: PSInformationRequestFile
+    ): Deferred<PSInformationRequestUploadedFile>
+
+    @PUT("transfer-aml-information/rest/v1/information-requests/{id}/answer")
+    fun answerInformationRequestQuestions(
+        @Path("id") informationRequestId: String,
+        @Body answers: PSInformationRequestAnswers
+    ): Deferred<PSInformationRequest>
 }

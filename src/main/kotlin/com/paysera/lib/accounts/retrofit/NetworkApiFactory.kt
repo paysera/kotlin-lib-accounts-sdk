@@ -15,6 +15,7 @@ import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.serializers.*
 import com.paysera.lib.common.entities.ApiCredentials
 import com.paysera.lib.common.entities.MetadataAwareResponse
+import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
 import com.paysera.lib.common.retrofit.BaseApiFactory
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,19 +24,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class NetworkApiFactory(
+    baseUrl: String,
     userAgent: String?,
     credentials: ApiCredentials,
+    certifiedHosts: List<String>,
     timeout: Long? = null,
-    httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
+    httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
+    errorLogger: ErrorLoggerInterface
 ) : BaseApiFactory<AccountsApiClient>(
+    baseUrl,
     userAgent,
     credentials,
+    certifiedHosts,
     timeout,
-    httpLoggingInterceptorLevel
+    httpLoggingInterceptorLevel,
+    errorLogger
 ) {
-    override val baseUrl = "https://accounts.paysera.com/public/"
-    override val certifiedHosts = listOf("accounts.paysera.com")
-
     override fun createClient(tokenRefresher: TokenRefresherInterface?): AccountsApiClient {
         createRetrofit(tokenRefresher).apply {
             return AccountsApiClient(
