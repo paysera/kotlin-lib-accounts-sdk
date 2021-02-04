@@ -25,7 +25,7 @@ import java.util.*
 
 class NetworkApiFactory(
     baseUrl: String,
-    locale: String,
+    locale: String?,
     userAgent: String?,
     credentials: ApiCredentials,
     certifiedHosts: List<String>,
