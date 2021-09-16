@@ -49,7 +49,8 @@ open class BaseTest {
             certifiedHosts = listOf("accounts.paysera.com"),
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
-            errorLogger = errorLoggerInterface
+            errorLogger = errorLoggerInterface,
+            locale = "en"
         ).createClient(tokenRefresher)
     }
 
