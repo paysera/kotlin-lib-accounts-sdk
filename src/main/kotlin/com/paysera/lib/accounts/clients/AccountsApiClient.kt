@@ -118,9 +118,10 @@ class AccountsApiClient(
             card
         )
 
-    fun activateCard(cardId: String) =
+    fun activateCard(cardId: String, cardCvv2: CardCvv2) =
         networkApiClient.activateCard(
-            cardId
+            cardId,
+            cardCvv2
         )
 
     fun deactivateCard(cardId: String) =
