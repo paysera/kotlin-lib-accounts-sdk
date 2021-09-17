@@ -130,9 +130,10 @@ interface NetworkApiClient {
         @Body card: CreatePaymentCardRequest
     ): Deferred<Card>
 
-    @PUT("issued-payment-card/v1/cards/{id}/activate")
+    @PUT("issued-payment-card/v1/cards/{id}/activate-card")
     fun activateCard(
-        @Path("id") id: String
+        @Path("id") id: String,
+        @Body cvv2: CardCvv2
     ): Deferred<Card>
 
     @PUT("issued-payment-card/v1/cards/{id}/deactivate")
