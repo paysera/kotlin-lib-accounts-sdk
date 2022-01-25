@@ -1,10 +1,6 @@
 package com.paysera.lib.accounts.clients
 
-import com.paysera.lib.accounts.entities.Account
-import com.paysera.lib.accounts.entities.AvailableCurrencyFilter
-import com.paysera.lib.accounts.entities.CardLimit
-import com.paysera.lib.accounts.entities.SetDefaultAccountDescriptionRequest
-import com.paysera.lib.accounts.entities.XpayTokenRequest
+import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.Authorization
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidationRequest
@@ -12,13 +8,14 @@ import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationReque
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
-import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
+import com.paysera.lib.accounts.entities.informationRequests.PSFile
 import com.paysera.lib.accounts.entities.informationRequests.filters.PSInformationRequestFilter
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionSpreadPercentageRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
 import com.paysera.lib.accounts.entities.transfers.ConversionTransferFilter
+import com.paysera.lib.accounts.entities.transfers.PSAdditionalTransferInformation
 import com.paysera.lib.accounts.retrofit.NetworkApiClient
 import com.paysera.lib.common.entities.BaseFilter
 import com.paysera.lib.common.entities.MetadataAwareResponse
@@ -357,7 +354,7 @@ class AccountsApiClient(
 
     fun uploadInformationRequestFile(
         informationRequestId: String,
-        file: PSInformationRequestFile
+        file: PSFile
     ) = networkApiClient.uploadInformationRequestFile(
         informationRequestId,
         file
@@ -371,9 +368,42 @@ class AccountsApiClient(
         answers
     )
 
-    fun provisionCardForXPay(id: String, request: XpayTokenRequest)  =
+    fun provisionCardForXPay(id: String, request: XpayTokenRequest) =
         networkApiClient.provisionCardForXPay(
             id,
             request
         )
+
+    fun isAdditionalInformationNeeded(transferId: String) =
+        networkApiClient.isAdditionalInformationNeeded(
+            transferId
+        )
+
+    fun getTransferDetails(transferId: String) =
+        networkApiClient.getTransferAmlDetails(
+            transferId
+        )
+
+    fun createTransferAmlDetailsDocument() =
+        networkApiClient.createTransferAmlDetailsDocument()
+
+    fun uploadTransferAmlDetailsDocumentFile(
+        hash: String,
+        file: PSFile
+    ) = networkApiClient.uploadTransferAmlDetailsDocumentFile(
+        hash,
+        file
+    )
+
+    fun saveTransferAmlDetails(
+        additionalTransferInformation: PSAdditionalTransferInformation
+    ) = networkApiClient.saveTransferAmlDetails(additionalTransferInformation)
+
+    fun saveAmlDetailsToTransfer(
+        hash: String,
+        transferId: String
+    ) = networkApiClient.saveAmlDetailsToTransfer(
+        hash,
+        transferId
+    )
 }
