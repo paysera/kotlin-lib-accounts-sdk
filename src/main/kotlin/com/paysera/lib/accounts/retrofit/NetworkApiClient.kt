@@ -383,7 +383,7 @@ interface NetworkApiClient {
         @Body answers: PSInformationRequestAnswers
     ): Deferred<PSInformationRequest>
 
-    @GET("transfer-aml-information/rest/v1/details/{transfer_id}/additional-info-needed")
+    @GET("transfer-aml/rest/v1/details/{transfer_id}/additional-info-needed")
     fun isAdditionalInformationNeeded(
         @Path("transfer_id") transferId: String
     ): Deferred<PSAdditionalTransferInformationNeeded>
@@ -408,7 +408,7 @@ interface NetworkApiClient {
     ): Deferred<PSAdditionalTransferInformation>
 
     @PUT("transfer-aml/rest/v1/details/{hash}/transfer/{transfer_id}")
-    fun saveAmlDetailsToTransfer(
+    fun assignAdditionalTransferDetails(
         @Path("hash") hash: String,
         @Path("transfer_id") transferId: String,
     ) : Deferred<PSAdditionalTransferInformation>

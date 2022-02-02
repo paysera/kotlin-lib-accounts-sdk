@@ -399,10 +399,10 @@ class AccountsApiClient(
         additionalTransferInformation: PSAdditionalTransferInformation
     ) = networkApiClient.saveTransferAmlDetails(additionalTransferInformation)
 
-    fun saveAmlDetailsToTransfer(
+    fun assignAdditionalTransferDetails(
         hash: String,
         transferId: String
-    ) = networkApiClient.saveAmlDetailsToTransfer(
+    ) = networkApiClient.assignAdditionalTransferDetails(
         hash,
         transferId
     )
