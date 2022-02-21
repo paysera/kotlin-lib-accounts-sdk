@@ -4,9 +4,9 @@ import com.paysera.lib.accounts.entities.*
 import com.paysera.lib.accounts.entities.authorizations.*
 import com.paysera.lib.accounts.entities.cards.*
 import com.paysera.lib.accounts.entities.clientAllowances.PSClientAllowances
+import com.paysera.lib.accounts.entities.informationRequests.PSFile
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
-import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestFile
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestUploadedFile
 import com.paysera.lib.accounts.entities.preciousMetals.Bullion
 import com.paysera.lib.accounts.entities.preciousMetals.BullionDealingCosts
@@ -14,9 +14,7 @@ import com.paysera.lib.accounts.entities.preciousMetals.BullionOption
 import com.paysera.lib.accounts.entities.preciousMetals.UnallocatedBullionBalance
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BuyBullionItemRequest
 import com.paysera.lib.accounts.entities.preciousMetals.requests.SellBullionItemRequest
-import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
-import com.paysera.lib.accounts.entities.transfers.Transfer
-import com.paysera.lib.accounts.entities.transfers.TransferBankParticipationInformation
+import com.paysera.lib.accounts.entities.transfers.*
 import com.paysera.lib.common.entities.MetadataAwareResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -264,13 +262,13 @@ interface NetworkApiClient {
 
     @GET("issued-payment-card/v1/accounts/{accountNumber}/card-delivery-preference")
     fun getPaymentCardDeliveryPreference(
-            @Path("accountNumber") accountNumber: String
+        @Path("accountNumber") accountNumber: String
     ): Deferred<PaymentCardDelivery>
 
     @PUT("issued-payment-card/v1/accounts/{accountNumber}/card-delivery-preference")
     fun setPaymentCardDeliveryPreference(
-            @Path("accountNumber") accountNumber: String,
-            @Body paymentCardDelivery: PaymentCardDelivery
+        @Path("accountNumber") accountNumber: String,
+        @Body paymentCardDelivery: PaymentCardDelivery
     ): Deferred<PaymentCardDelivery>
 
     @GET("issued-payment-card/v1/accounts/{accountNumber}/expiring-card-reorder-restriction")
@@ -311,7 +309,7 @@ interface NetworkApiClient {
         @Query("offset") offset: Int?,
         @Query("order_by") orderBy: String?,
         @Query("order_direction") orderDirection: String?
-    ) : Deferred<MetadataAwareResponse<Bullion>>
+    ): Deferred<MetadataAwareResponse<Bullion>>
 
     @GET("bullion/rest/v1/unallocated-balance")
     fun getUnallocatedBullionBalance(
@@ -323,10 +321,10 @@ interface NetworkApiClient {
     ): Deferred<MetadataAwareResponse<UnallocatedBullionBalance>>
 
     @POST("bullion/rest/v1/items/buy")
-    fun buyBullion(@Body request: BuyBullionItemRequest) : Deferred<Response<Void>>
+    fun buyBullion(@Body request: BuyBullionItemRequest): Deferred<Response<Void>>
 
     @POST("bullion/rest/v1/items/sell")
-    fun sellBullion(@Body request: SellBullionItemRequest) : Deferred<Response<Void>>
+    fun sellBullion(@Body request: SellBullionItemRequest): Deferred<Response<Void>>
 
     @GET("currency-exchange/rest/v1/currency-exchanges/spread-percentage")
     fun getBullionSpreadPercentage(
@@ -376,7 +374,7 @@ interface NetworkApiClient {
     @POST("transfer-aml-information/rest/v1/information-requests/{id}/files")
     fun uploadInformationRequestFile(
         @Path("id") informationRequestId: String,
-        @Body file: PSInformationRequestFile
+        @Body file: PSFile
     ): Deferred<PSInformationRequestUploadedFile>
 
     @PUT("transfer-aml-information/rest/v1/information-requests/{id}/answer")
@@ -384,4 +382,34 @@ interface NetworkApiClient {
         @Path("id") informationRequestId: String,
         @Body answers: PSInformationRequestAnswers
     ): Deferred<PSInformationRequest>
+
+    @GET("transfer-aml/rest/v1/details/{transfer_id}/additional-info-needed")
+    fun isAdditionalInformationNeeded(
+        @Path("transfer_id") transferId: String
+    ): Deferred<PSAdditionalTransferInformationNeeded>
+
+    @POST("transfer-aml/rest/v1/documents")
+    fun createTransferAmlDetailsDocument(): Deferred<PSTransferAmlDetailsDocument>
+
+    @POST("transfer-aml/rest/v1/documents/{hash}")
+    fun uploadTransferAmlDetailsDocumentFile(
+        @Path("hash") hash: String,
+        @Body file: PSFile
+    ): Deferred<PSTransferAmlDetailsDocument>
+
+    @POST("transfer-aml/rest/v1/details")
+    fun saveTransferAmlDetails(
+        @Body request: PSAdditionalTransferInformation
+    ): Deferred<PSAdditionalTransferInformation>
+
+    @GET("transfer-aml/rest/v1/details")
+    fun getTransferAmlDetails(
+        @Query("transfer_id") transferId: String
+    ): Deferred<PSAdditionalTransferInformation>
+
+    @PUT("transfer-aml/rest/v1/details/{hash}/transfer/{transfer_id}")
+    fun assignAdditionalTransferDetails(
+        @Path("hash") hash: String,
+        @Path("transfer_id") transferId: String,
+    ) : Deferred<PSAdditionalTransferInformation>
 }
