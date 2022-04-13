@@ -6,7 +6,7 @@ object ApplicationDependencyVersions {
     const val gson = "2.8.6"
     const val jodaMoney = "0.12"
     const val certificateTransparency = "0.3.0"
-    const val payseraCommonSdk = "2.6.3"
+    const val payseraCommonSdk = "2.6.4"
     const val assertjCore = "3.19.0"
     const val jupiter = "5.7.2"
 }
