@@ -412,4 +412,10 @@ interface NetworkApiClient {
         @Path("hash") hash: String,
         @Path("transfer_id") transferId: String,
     ) : Deferred<PSAdditionalTransferInformation>
+
+    @GET("rest/partner/v1/partners")
+    fun getPartner(
+        @Query("covenantee_id") userId: String,
+        @Query("date") date: String
+    ) : Deferred<Partner>
 }

@@ -406,4 +406,12 @@ class AccountsApiClient(
         hash,
         transferId
     )
+
+    fun getPartner(
+        userId: String,
+        date: String
+    ) = networkApiClient.getPartner(
+        userId,
+        date
+    )
 }
