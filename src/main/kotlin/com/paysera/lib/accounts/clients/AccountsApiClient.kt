@@ -407,11 +407,9 @@ class AccountsApiClient(
         transferId
     )
 
-    fun getPartner(
-        userId: String,
-        date: String
-    ) = networkApiClient.getPartner(
-        userId,
-        date
+    fun getClientPartners(
+        userId: Int
+    ) = networkApiClient.getClientPartners(
+        userId
     )
 }

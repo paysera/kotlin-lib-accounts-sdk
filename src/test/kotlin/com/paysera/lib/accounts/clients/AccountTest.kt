@@ -15,4 +15,10 @@ internal class AccountTest : BaseTest() {
         assert(response.isSuccess)
         assert(response.getOrNull()?.isNotEmpty() == true)
     }
+
+    @Test
+    fun getClientPartner() {
+        val response = apiClient.getClientPartners(0).runCatchingBlocking()
+        assert(response.isSuccess && response.getOrNull()?.items?.isNotEmpty() == true)
+    }
 }

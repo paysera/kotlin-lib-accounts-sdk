@@ -1,3 +1,3 @@
 package com.paysera.lib.accounts.entities
 
-data class Partner(val partnerId: String)
+data class ClientPartner(val code: String)

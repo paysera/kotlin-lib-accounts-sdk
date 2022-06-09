@@ -413,9 +413,8 @@ interface NetworkApiClient {
         @Path("transfer_id") transferId: String,
     ) : Deferred<PSAdditionalTransferInformation>
 
-    @GET("rest/partner/v1/partners")
-    fun getPartner(
-        @Query("covenantee_id") userId: String,
-        @Query("date") date: String
-    ) : Deferred<Partner>
+    @GET("rest/partner/v1/client-partners")
+    fun getClientPartners(
+        @Query("covenantee_id") userId: Int
+    ) : Deferred<MetadataAwareResponse<ClientPartner>>
 }
