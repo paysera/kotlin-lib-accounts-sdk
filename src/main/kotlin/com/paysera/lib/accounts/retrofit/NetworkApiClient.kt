@@ -65,6 +65,11 @@ interface NetworkApiClient {
         @Path("userId") userId: Int
     ): Deferred<Questionnaire>
 
+    @GET("questionnaire/rest/v1/configuration/{userId}")
+    fun getQuestionnaireConfiguration(
+        @Path("userId") userId: Int
+    ): Deferred<QuestionnaireConfiguration>
+
     // Transfer
 
     @GET("transfer/rest/v1/transfers/{id}")
@@ -411,10 +416,10 @@ interface NetworkApiClient {
     fun assignAdditionalTransferDetails(
         @Path("hash") hash: String,
         @Path("transfer_id") transferId: String,
-    ) : Deferred<PSAdditionalTransferInformation>
+    ): Deferred<PSAdditionalTransferInformation>
 
     @GET("rest/partner/v1/client-partners")
     fun getClientPartners(
         @Query("covenantee_id") userId: Int
-    ) : Deferred<MetadataAwareResponse<ClientPartner>>
+    ): Deferred<MetadataAwareResponse<ClientPartner>>
 }
