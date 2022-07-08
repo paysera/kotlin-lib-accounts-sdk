@@ -6,9 +6,9 @@ import com.paysera.lib.accounts.entities.authorizations.AuthorizationFilter
 import com.paysera.lib.accounts.entities.authorizations.AuthorizationUserValidationRequest
 import com.paysera.lib.accounts.entities.authorizations.CreateAuthorizationRequest
 import com.paysera.lib.accounts.entities.cards.*
+import com.paysera.lib.accounts.entities.informationRequests.PSFile
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequest
 import com.paysera.lib.accounts.entities.informationRequests.PSInformationRequestAnswers
-import com.paysera.lib.accounts.entities.informationRequests.PSFile
 import com.paysera.lib.accounts.entities.informationRequests.filters.PSInformationRequestFilter
 import com.paysera.lib.accounts.entities.preciousMetals.filters.BullionFilter
 import com.paysera.lib.accounts.entities.preciousMetals.requests.BullionSpreadPercentageRequest
@@ -195,6 +195,11 @@ class AccountsApiClient(
 
     fun getLastUserQuestionnaire(userId: Int) =
         networkApiClient.getLastUserQuestionnaire(
+            userId
+        )
+
+    fun getQuestionnaireConfiguration(userId: Int) =
+        networkApiClient.getQuestionnaireConfiguration(
             userId
         )
 
