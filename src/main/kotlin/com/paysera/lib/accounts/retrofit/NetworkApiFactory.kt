@@ -18,6 +18,7 @@ import com.paysera.lib.common.entities.MetadataAwareResponse
 import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
 import com.paysera.lib.common.retrofit.BaseApiFactory
+import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import org.joda.money.Money
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,7 +31,8 @@ class NetworkApiFactory(
     credentials: AuthorizationApiCredentials,
     timeout: Long? = null,
     httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
-    errorLogger: ErrorLoggerInterface
+    errorLogger: ErrorLoggerInterface,
+    certificateInterceptor: Interceptor?
 ) : BaseApiFactory<AccountsApiClient>(
     baseUrl,
     locale,
@@ -38,7 +40,8 @@ class NetworkApiFactory(
     credentials,
     timeout,
     httpLoggingInterceptorLevel,
-    errorLogger
+    errorLogger,
+    certificateInterceptor
 ) {
     override fun createClient(tokenRefresher: TokenRefresherInterface?): AccountsApiClient {
         createRetrofit(tokenRefresher).apply {

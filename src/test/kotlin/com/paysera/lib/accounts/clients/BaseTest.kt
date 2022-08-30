@@ -46,11 +46,11 @@ open class BaseTest {
             baseUrl = "https://accounts.paysera.com/public/",
             userAgent = userAgent,
             credentials = apiCredentials,
-            certifiedHosts = listOf("accounts.paysera.com"),
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = errorLoggerInterface,
-            locale = "en"
+            locale = "en",
+            certificateInterceptor = null
         ).createClient(tokenRefresher)
     }
 
