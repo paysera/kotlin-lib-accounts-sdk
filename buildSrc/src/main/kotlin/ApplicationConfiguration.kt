@@ -1,7 +1,8 @@
 object ApplicationConfiguration {
     const val artifactId = "kotlin-lib-accounts-sdk"
     const val groupId = "com.paysera.lib"
-    const val version = "5.24.9"
+    // Note: This should be 5.24.11-SNAPSHOT, but .10-SNAPSHOT was kept for InRento, .10 should use for release
+    const val version = "5.24.11-SNAPSHOT"
     const val name = "Kotlin Library Accounts SDK"
     const val url = "https://www.paysera.com/v2/en-GB/index"
     const val description = "Paysera: Kotlin Accounts SDK Library"
