@@ -417,4 +417,12 @@ class AccountsApiClient(
     ) = networkApiClient.getClientPartners(
         userId
     )
+
+    fun getCardTntDeliveryCountries(
+        offset: Int?,
+        limit: Int?
+    ) = networkApiClient.getCardTntDeliveryCountries(
+        offset,
+        limit
+    )
 }

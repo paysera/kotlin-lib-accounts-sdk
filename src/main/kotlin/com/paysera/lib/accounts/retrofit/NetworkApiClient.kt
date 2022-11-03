@@ -422,4 +422,10 @@ interface NetworkApiClient {
     fun getClientPartners(
         @Query("covenantee_id") userId: Int
     ): Deferred<MetadataAwareResponse<ClientPartner>>
+
+    @GET("issued-payment-card/v1/card-tnt-delivery-countries")
+    fun getCardTntDeliveryCountries(
+        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int?
+    ) : Deferred<MetadataAwareResponse<String>>
 }
