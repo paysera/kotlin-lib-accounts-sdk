@@ -13,8 +13,8 @@ import com.paysera.lib.accounts.entities.cards.CategorizedAccountNumbers
 import com.paysera.lib.accounts.entities.cards.PaymentCardDesign
 import com.paysera.lib.accounts.entities.transfers.ConversionTransfer
 import com.paysera.lib.accounts.serializers.*
-import com.paysera.lib.common.entities.AuthorizationApiCredentials
 import com.paysera.lib.common.entities.MetadataAwareResponse
+import com.paysera.lib.common.interfaces.BaseApiCredentials
 import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
 import com.paysera.lib.common.retrofit.BaseApiFactory
@@ -28,7 +28,7 @@ class NetworkApiFactory(
     baseUrl: String,
     locale: String?,
     userAgent: String?,
-    credentials: AuthorizationApiCredentials,
+    credentials: BaseApiCredentials,
     timeout: Long? = null,
     httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
     errorLogger: ErrorLoggerInterface,
