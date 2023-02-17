@@ -1,6 +1,7 @@
 package com.paysera.lib.accounts.clients
 
 import com.paysera.lib.accounts.entities.CardLimit
+import com.paysera.lib.accounts.entities.cards.CardDeliveryPricesFilter
 import com.paysera.lib.accounts.entities.cards.CardsFilter
 import com.paysera.lib.accounts.entities.cards.PaymentCardDesignFilter
 import com.paysera.lib.common.entities.BaseFilter
@@ -70,8 +71,9 @@ internal class IssuedPaymentCardTest : BaseTest() {
 
     @Test
     fun getCardDeliveryPrices() {
+        val filter = CardDeliveryPricesFilter("lt")
         val response = apiClient.getCardDeliveryPrices(
-            testCountry
+            filter
         ).runCatchingBlocking()
         assert(response.isSuccess)
     }

@@ -181,11 +181,6 @@ interface NetworkApiClient {
         @Body cardCvv2: CardCvv2
     ): Deferred<CardPin>
 
-    @GET("issued-payment-card/v1/card-delivery-prices/{country}")
-    fun getCardDeliveryPrices(
-        @Path("country") country: String
-    ): Deferred<List<CardDeliveryPrice>>
-
     @GET("issued-payment-card/v1/card-account-issue-price")
     fun getCardIssuePrice(
         @Query("card_account_owner_id") cardAccountOwnerId: Int,
@@ -427,5 +422,14 @@ interface NetworkApiClient {
     fun getCardTntDeliveryCountries(
         @Query("offset") offset: Int?,
         @Query("limit") limit: Int?
-    ) : Deferred<MetadataAwareResponse<String>>
+    ): Deferred<MetadataAwareResponse<String>>
+
+    @GET("issued-payment-card/v1/card-delivery-prices")
+    fun getCardDeliveryPrices(
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?,
+        @Query("country_code") countryCode: String
+    ): Deferred<MetadataAwareResponse<CardDeliveryPrice>>
 }
