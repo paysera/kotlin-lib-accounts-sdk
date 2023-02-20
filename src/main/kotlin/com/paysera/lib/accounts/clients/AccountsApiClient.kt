@@ -163,11 +163,6 @@ class AccountsApiClient(
             accountNumber
         )
 
-    fun getCardDeliveryPrices(country: String) =
-        networkApiClient.getCardDeliveryPrices(
-            country
-        )
-
     fun getCardIssuePrice(cardAccountOwnerId: Int, cardOwnerId: Int) =
         networkApiClient.getCardIssuePrice(
             cardAccountOwnerId,
@@ -424,5 +419,15 @@ class AccountsApiClient(
     ) = networkApiClient.getCardTntDeliveryCountries(
         offset,
         limit
+    )
+
+    fun getCardDeliveryPrices(
+        filter: CardDeliveryPricesFilter
+    ) = networkApiClient.getCardDeliveryPrices(
+        limit = filter.limit,
+        offset = filter.offset,
+        orderBy = filter.orderBy,
+        orderDirection = filter.orderDirection,
+        countryCode = filter.countryCode
     )
 }
