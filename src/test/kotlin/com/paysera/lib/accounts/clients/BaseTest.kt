@@ -22,7 +22,9 @@ open class BaseTest {
         private val apiCredentials = PayseraApiCredentials(
             "your_token",
             120000
-        )
+        ).apply {
+            locale = "en"
+        }
         private val timeout: Long? = null
         private val loggingLevel = HttpLoggingInterceptor.Level.BODY
 
@@ -49,7 +51,6 @@ open class BaseTest {
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = errorLoggerInterface,
-            locale = "en",
             certificateInterceptor = null
         ).createClient(tokenRefresher)
     }
