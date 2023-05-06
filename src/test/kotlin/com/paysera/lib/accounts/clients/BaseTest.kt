@@ -21,10 +21,9 @@ open class BaseTest {
         private val userAgent = "okhttp/3.12.1"
         private val apiCredentials = PayseraApiCredentials(
             "your_token",
+            "en",
             120000
-        ).apply {
-            locale = "en"
-        }
+        )
         private val timeout: Long? = null
         private val loggingLevel = HttpLoggingInterceptor.Level.BODY
 
