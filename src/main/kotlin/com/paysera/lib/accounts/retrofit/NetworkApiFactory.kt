@@ -26,7 +26,6 @@ import java.util.*
 
 class NetworkApiFactory(
     baseUrl: String,
-    locale: String?,
     userAgent: String?,
     credentials: BaseApiCredentials,
     timeout: Long? = null,
@@ -35,7 +34,6 @@ class NetworkApiFactory(
     certificateInterceptor: Interceptor?
 ) : BaseApiFactory<AccountsApiClient>(
     baseUrl,
-    locale,
     userAgent,
     credentials,
     timeout,

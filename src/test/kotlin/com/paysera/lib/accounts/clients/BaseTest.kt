@@ -21,6 +21,7 @@ open class BaseTest {
         private val userAgent = "okhttp/3.12.1"
         private val apiCredentials = PayseraApiCredentials(
             "your_token",
+            "en",
             120000
         )
         private val timeout: Long? = null
@@ -49,7 +50,6 @@ open class BaseTest {
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = errorLoggerInterface,
-            locale = "en",
             certificateInterceptor = null
         ).createClient(tokenRefresher)
     }
