@@ -8,5 +8,6 @@ data class CreatePaymentCardRequest (
     var accountNumber: String? = null,
     var accountOwnerId: Int? = null,
     var chargeInfo: ChargeInfo? = null,
-    var visualType: String? = null
+    var visualType: String? = null,
+    var officeId: String? = null
 )
