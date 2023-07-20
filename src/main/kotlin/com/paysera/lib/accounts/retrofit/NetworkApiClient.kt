@@ -432,4 +432,7 @@ interface NetworkApiClient {
         @Query("order_direction") orderDirection: String?,
         @Query("country_code") countryCode: String
     ): Deferred<MetadataAwareResponse<CardDeliveryPrice>>
+
+    @GET("issued-payment-card/v1/office-addresses")
+    fun getOfficeAddresses(): Deferred<MetadataAwareResponse<PSOfficeAddress>>
 }

@@ -430,4 +430,6 @@ class AccountsApiClient(
         orderDirection = filter.orderDirection,
         countryCode = filter.countryCode
     )
+
+    fun getOfficeAddresses() = networkApiClient.getOfficeAddresses()
 }
