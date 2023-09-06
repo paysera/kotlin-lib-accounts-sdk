@@ -14,4 +14,10 @@ internal class QuestionnaireTest : BaseTest() {
         val response = apiClient.getLastUserQuestionnaire(testUserId).runCatchingBlocking()
         assert(response.isSuccess)
     }
+
+    @Test
+    fun getQuestionnaireConfiguration() {
+        val response = apiClient.getQuestionnaireConfiguration(testUserId).runCatchingBlocking()
+        assert(response.isSuccess)
+    }
 }
