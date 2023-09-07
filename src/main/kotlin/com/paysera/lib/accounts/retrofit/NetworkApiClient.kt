@@ -68,7 +68,7 @@ interface NetworkApiClient {
     @GET("questionnaire/rest/v1/configuration/{userId}")
     fun getQuestionnaireConfiguration(
         @Path("userId") userId: Int
-    ): Deferred<QuestionnaireConfiguration>
+    ): Deferred<QuestionnaireConfigurationItem>
 
     // Transfer
 
@@ -410,7 +410,7 @@ interface NetworkApiClient {
     @PUT("transfer-aml/rest/v1/details/{hash}/transfer/{transfer_id}")
     fun assignAdditionalTransferDetails(
         @Path("hash") hash: String,
-        @Path("transfer_id") transferId: String,
+        @Path("transfer_id") transferId: String
     ): Deferred<PSAdditionalTransferInformation>
 
     @GET("rest/partner/v1/client-partners")
